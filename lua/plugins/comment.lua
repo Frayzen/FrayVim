@@ -1,23 +1,15 @@
 return {
-    'numToStr/Comment.nvim',
-    opts = {
-        mappings = {
-            basic = true,
-            extra = true,
-        },
-    },
+    "tpope/vim-commentary",
     lazy = false,
-    keys = {
-        {
-            "<leader>/",
-            "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-            desc = "Toggle comment for selection"
-        },
-        {
-            "<leader>/",
-            "<cmd>lua require('Comment.api').toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)<cr>",
-            desc = "Toggle comment line",
-            mode = "v",
-        },
-    }
+    config = function()
+        -- vim.cmd("autocmd FileType apache setlocal commentstring=
+        register_mapping({
+            n = {
+                ["<Leader>/"] = { "<Plug>CommentaryLine", "Toggle comment" },
+            },
+            v = {
+                ["<Leader>/"] = { "<Plug>Commentary", "Toggle comment" },
+            },
+        })
+    end,
 }
