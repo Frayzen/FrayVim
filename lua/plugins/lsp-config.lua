@@ -1,0 +1,35 @@
+-- LSP
+
+return {
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
+	},
+	config = function()
+		require("telescope").load_extension("ui-select")
+
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				-- Enable completion triggered by <c-x><c-o>
+				vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+				register_mapping({
+					n = {
+						["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
+						["<space>f"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
+						["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
+						["<Leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
+						["<Leader>r"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+						-- ["<C-D>"] = { "<cmd>lua vim.lsp.buf.type_definition<CR>", "Type definiton" },
+						["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
+						["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
+						["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
+						["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to declaration" },
+					},
+				})
+			end,
+		})
+	end,
+}

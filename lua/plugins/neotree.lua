@@ -9,9 +9,9 @@ return {
     },
     keys = {
         { "<Leader>e", "<cmd>Neotree toggle<CR>", desc = "Toggle explorer" },
-        { "<Leader>o", "<cmd>Neotree focus<CR>", desc = "Focus explorer" },
+        { "<Leader>o", "<cmd>Neotree focus<CR>",  desc = "Focus explorer" },
     },
-    config = function ()
+    config = function()
         require('neo-tree').setup({
             close_if_last_window = true,
             filesystem = {
