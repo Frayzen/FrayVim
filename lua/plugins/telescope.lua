@@ -11,6 +11,6 @@ return {
 		{ "<leader>fk", "<cmd>Telescope keymaps<CR>", desc = "Find keys" },
 		{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
 		{ "<leader>fw", "<cmd>Telescope live_grep<CR>", desc = "Find in files" },
-		{ "<leader>fm", "<cmd>Telescope man_pages section={'ALL'}<CR>", desc = "Man page" },
+		{ "<leader>fm", "<cmd>Telescope man_pages sections={'ALL'}<CR>", desc = "Man page" },
 	},
 }
