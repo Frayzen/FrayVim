@@ -113,6 +113,7 @@ return {
 					keyword_length = 1,
 					max_item_count = 5,
 					entry_filter = function(entry, _)
+						local types = require("cmp.types")
 						if types.lsp == nil then
 							return true
 						end

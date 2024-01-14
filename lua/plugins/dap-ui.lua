@@ -2,8 +2,11 @@ return {
 	"rcarriga/nvim-dap-ui",
 	dependecies = {
 		"mfussenegger/nvim-dap",
+		"folke/neodev.nvim",
 	},
+	lazy = false,
 	config = function()
+		require("dapui").setup()
 		local dap, dapui = require("dap"), require("dapui")
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()
@@ -41,13 +44,6 @@ return {
 			desc = "Continue",
 		},
 		{
-			"<Leader>dc",
-			function()
-				require("dap").continue()
-			end,
-			desc = "Continue",
-		},
-		{
 			"<Leader>di",
 			function()
 				require("dap").step_into()
@@ -55,7 +51,7 @@ return {
 			desc = "Step Into",
 		},
 		{
-			"<Leader>dO",
+			"<Leader>do",
 			function()
 				require("dap").step_out()
 			end,
@@ -69,11 +65,19 @@ return {
 			desc = "Rerun",
 		},
 		{
-			"<Leader>do",
+			"<Leader>ds",
 			function()
 				require("dap").step_over()
 			end,
-			desc = "Step Over",
+			desc = "Step",
+		},
+
+		{
+			"<Leader>dn",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Next",
 		},
 	},
 }

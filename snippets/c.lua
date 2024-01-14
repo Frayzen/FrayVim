@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+
 local function snake(s)
 	return s:gsub("%f[^%l]%u", "_%1")
 		:gsub("%f[^%a]%d", "_%1")
@@ -36,14 +38,6 @@ return {
 		t({ '.h"', "" }),
 	}),
 
-	s({ trig = "print", filetype = "c" }, {
-		t('printf("'),
-		i(1),
-		i(0),
-		t('"\\n'),
-		i(2),
-		t(");"),
-	}),
 	s("i<", { t("#include <"), i(1), t({ ".h>" }) }),
 	s('i""', { t('#include "'), i(1), t({ '.h"' }) }),
 	s({ trig = "fori", priority = 100000000 }, {
@@ -179,8 +173,7 @@ return {
 		i(1, "argc"),
 		t(", char *"),
 		i(2, "argv"),
-		t("[])"),
-		t({ ")", "{", "    " }),
+		t({ "[])", "{", "    " }),
 		i(0, ""),
 		t({ "", "}" }),
 	}),
@@ -189,5 +182,17 @@ return {
 		t({ "{", "    " }),
 		i(0, ""),
 		t({ "", "    return 0;", "}" }),
+	}),
+	s("trig", {
+		i(1, "This is a tes "),
+		t(" "),
+		c(2, {
+			t("Ugh boring, a text node"),
+			i(nil, "At least I can edit something now..."),
+			f(function(_)
+				return "Still only counts as text!!"
+			end, {}),
+		}),
+		i(3, "Other"),
 	}),
 }

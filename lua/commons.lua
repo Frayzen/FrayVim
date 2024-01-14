@@ -4,11 +4,12 @@ vim.opt.filetype.indent = "on"
 vim.opt.expandtab = true
 
 vim.opt.number = true
+vim.opt.autoread = true
 vim.opt.clipboard = "unnamed"
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.cc = "80"
-vim.opt.signcolumn = "no"
+vim.opt.signcolumn = "yes:1"
 
 vim.g.indentLine_char = "┊"
 vim.g.indent_blankline_filetype_exclude = "[ dashboard ]"

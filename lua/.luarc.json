@@ -1,0 +1,6 @@
+{
+    "diagnostics.globals": [
+        "has_words_before",
+        "complete"
+    ]
+}
