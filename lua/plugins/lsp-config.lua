@@ -21,6 +21,8 @@ return {
 						["<Leader>k"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
 						["<Leader>F"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
 						["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
+						["<M-CR>"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
+						["<Leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
 						["<Leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
 						["<Leader>r"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
 						-- ["<C-D>"] = { "<cmd>lua vim.lsp.buf.type_definition<CR>", "Type definiton" },
@@ -29,6 +31,11 @@ return {
 						["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
 						["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to declaration" },
 					},
+                    v = {
+						["<M-CR>"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
+						["<Leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
+						["<Leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
+                    }
 				})
 			end,
 		})

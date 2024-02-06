@@ -21,6 +21,9 @@ mappings = {
 		["<Leader>f"] = {
 			name = "Find",
 		},
+		["<Leader>j"] = {
+			name = "Java",
+		},
 		["<Leader>L"] = { "<cmd>Lazy<CR>", "Lazy" },
 	},
 	v = {
