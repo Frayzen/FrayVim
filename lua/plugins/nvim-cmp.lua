@@ -36,7 +36,7 @@ return {
 			},
 			completion = {
 				keyword_length = 1,
-				max_item_count = 5,
+				max_item_count = 8,
 			},
 			window = {
 				-- completion = cmp.config.window.bordered(),
@@ -111,7 +111,7 @@ return {
 				{
 					name = "nvim_lsp",
 					keyword_length = 1,
-					max_item_count = 5,
+					max_item_count = 8,
 					entry_filter = function(entry, _)
 						local types = require("cmp.types")
 						if types.lsp == nil then
