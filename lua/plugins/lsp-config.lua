@@ -7,6 +7,9 @@ return {
 		"nvim-telescope/telescope-ui-select.nvim",
 		"folke/neodev.nvim",
 	},
+    opts = {
+        inlay_hints = { enabled = true },
+    },
 	config = function()
 		require("telescope").load_extension("ui-select")
 
