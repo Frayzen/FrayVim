@@ -1,7 +1,6 @@
 local M = {}
 
-local qs_hh = [[
-(class_specifier
+local qs_hh = [[ (class_specifier
     name: (type_identifier) @name (#eq? class_name)
     body: (
         field_declaration_list
@@ -84,10 +83,12 @@ function get_methods(hh_buffer, class_name)
     return methods
 end
 
-function M.retrieve_methods(class_name, hh_buffer, cc_buffer)
+function M.retrieve_methods(class_name, hh_buffer, cc_buffer, cc_line)
     local implemented = get_implemented(cc_buffer)
     local all = get_methods(hh_buffer, class_name)
-    local choices = { "None" }
+    local choices = { "None", "All" }
+
+    print("line is " .. cc_line)
     for k, _ in pairs(implemented) do
         if all[k] then
             all[k] = nil
@@ -102,12 +103,24 @@ function M.retrieve_methods(class_name, hh_buffer, cc_buffer)
         full = full .. class_name .. "::" .. v["name"] .. v["params"]
         table.insert(choices, full)
     end
-    require("cpp-tools.menu").show_menu(choices, function(_, sel)
+    require("cpp-tools.menu").show_menu(choices, function(sel)
         if sel == "None" then
             return
+        elseif sel == "All" then
+            local lines = {}
+            for _, value in pairs(choices) do
+                if value ~= "All" and value ~= "None" then
+                    table.insert(lines, value)
+                    table.insert(lines, "{")
+                    table.insert(lines, "	")
+                    table.insert(lines, "}")
+                    table.insert(lines, "")
+                end
+            end
+            vim.api.nvim_buf_set_text(cc_buffer, cc_line - 1, 0, cc_line - 1, 0, lines)
+        else
+            vim.api.nvim_buf_set_text(cc_buffer, cc_line - 1, 0, cc_line - 1, 0, { "", sel, "{", "	", "}" })
         end
-        local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-        vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { sel .. "{", "	", "}" })
     end, "Chose method to implement")
 end
 

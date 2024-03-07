@@ -1,30 +1,29 @@
 local M = {}
 
-local popup = require("plenary.popup")
-
-function M.show_menu(opts, cb, name)
-    local height = #opts
-    local width = 50
-    local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-
-    popup.create(opts, {
-        title = name,
-        highlight = "CppToolsWindow",
-        line = math.floor(((vim.o.lines - height) / 2) - 1),
-        col = math.floor((vim.o.columns - width) / 2),
-        minwidth = width,
-        minheight = height,
-        borderchars = borderchars,
-        callback = cb,
-    })
-    local bufnr = vim.api.nvim_win_get_buf(0)
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "q",
-        "<cmd>lua require('cpp-tools.menu').close_menu()<CR>",
-        { silent = false }
-    )
+function M.show_menu(choices, cb, name)
+    local pickers = require("telescope.pickers")
+    local finders = require("telescope.finders")
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+    local conf = require("telescope.config").values
+    local opts = require("telescope.themes").get_dropdown({})
+    pickers
+        .new(opts, {
+            prompt_title = name,
+            finder = finders.new_table({
+                results = choices,
+            }),
+            attach_mappings = function(prompt_bufnr, map)
+                actions.select_default:replace(function()
+                    actions.close(prompt_bufnr)
+                    local selection = action_state.get_selected_entry()
+                    cb(selection[1])
+                end)
+                return true
+            end,
+            sorter = conf.generic_sorter(opts),
+        })
+        :find()
 end
 
 function M.close_menu()

@@ -13,6 +13,7 @@ function M.retrieve_classes()
         return
     end
     local cur = vim.api.nvim_get_current_buf()
+    local cur_line = vim.fn.line(".")
     local buffer = vim.fn.bufadd(getName())
     vim.fn.bufload(buffer)
     local parser = ts.get_parser(buffer)
@@ -25,15 +26,14 @@ function M.retrieve_classes()
     local query = ts.query.parse(lang, qs_classes)
     local classes = {}
     for _, match, _ in query:iter_matches(root, buffer) do
-        print(t(match[1], buffer))
         table.insert(classes, t(match[1], buffer))
     end
     if #classes == 1 then
-        require("cpp-tools.method_retriever").retrieve_methods(classes[1], buffer, cur)
+        require("cpp-tools.method_retriever").retrieve_methods(classes[1], buffer, cur, cur_line)
         return
     end
-    require("cpp-tools.menu").show_menu(classes, function(_, sel)
-        require("cpp-tools.method_retriever").retrieve_methods(sel, buffer, cur, "Chose Class")
+    require("cpp-tools.menu").show_menu(classes, function(sel)
+        require("cpp-tools.method_retriever").retrieve_methods(sel, buffer, cur, cur_line)
     end)
 end
 
