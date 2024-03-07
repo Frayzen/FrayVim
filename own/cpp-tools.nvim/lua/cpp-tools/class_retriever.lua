@@ -34,7 +34,7 @@ function M.retrieve_classes()
     end
     require("cpp-tools.menu").show_menu(classes, function(sel)
         require("cpp-tools.method_retriever").retrieve_methods(sel, buffer, cur, cur_line)
-    end)
+    end, "Chose Class")
 end
 
 return M

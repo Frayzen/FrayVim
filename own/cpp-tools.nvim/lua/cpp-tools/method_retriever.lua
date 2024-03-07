@@ -1,7 +1,8 @@
 local M = {}
 
-local qs_hh = [[ (class_specifier
-    name: (type_identifier) @name (#eq? class_name)
+local qs_hh = [[
+(class_specifier
+    name: (type_identifier) @ti (#eq? @ti "class_name")
     body: (
         field_declaration_list
             (_
@@ -66,6 +67,7 @@ function get_methods(hh_buffer, class_name)
     local root = tree:root()
     local lang = parser:lang()
     local qs = qs_hh:gsub("class_name", class_name)
+    print(qs)
     local query = ts.query.parse(lang, qs)
     local methods = {}
     for _, match, _ in query:iter_matches(root, hh_buffer) do
@@ -86,9 +88,7 @@ end
 function M.retrieve_methods(class_name, hh_buffer, cc_buffer, cc_line)
     local implemented = get_implemented(cc_buffer)
     local all = get_methods(hh_buffer, class_name)
-    local choices = { "None", "All" }
-
-    print("line is " .. cc_line)
+    local choices = { "All", "None" }
     for k, _ in pairs(implemented) do
         if all[k] then
             all[k] = nil
