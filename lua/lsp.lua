@@ -17,7 +17,7 @@ lsp_params = {
             -- })
         end,
     },
-    luals = {
+    lua_ls = {
         settings = {
             Lua = {
                 completion = {
