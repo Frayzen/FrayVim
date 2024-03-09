@@ -1,5 +1,7 @@
 local M = {}
 
+-- choices is a list with the display in first element
+-- cb is gonna be given one of the choices
 function M.show_menu(choices, cb, name)
     local pickers = require("telescope.pickers")
     local finders = require("telescope.finders")
@@ -13,9 +15,6 @@ function M.show_menu(choices, cb, name)
             finder = finders.new_table({
                 results = choices,
                 entry_maker = function(entry)
-                    if type(entry) == "string" then
-                        return entry
-                    end
                     return {
                         value = entry,
                         display = entry[1],

@@ -3,10 +3,7 @@ require("cpp-tools.tools")
 
 local qs = [[
 (function_definition
-  type: [
-         (primitive_type)
-         (type_identifier)
-        ]? @type
+  type: (_)? @type
   (function_declarator
     declarator: (_) @name
     parameters: (_) @params

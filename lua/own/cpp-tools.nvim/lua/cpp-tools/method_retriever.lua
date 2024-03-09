@@ -19,10 +19,7 @@ local qs_hh = [[
 
 local qs_cc = [[
 (function_definition
-  type: [
-         (primitive_type)
-         (type_identifier)
-        ]? @type
+  type: (_)? @type
   (function_declarator
     declarator: (_) @name
     parameters: (_) @params
@@ -74,18 +71,18 @@ end
 
 function M.retrieve_methods(class_name, hh_buffer, cc_buffer, cc_line)
     local unimplemented = M.retrieve_unimplemented(class_name, hh_buffer, cc_buffer)
-    local choices = { "All", "None" }
+    local choices = { { "All" }, { "None" } }
     for _, v in pairs(unimplemented) do
-        table.insert(choices, get_full_meth(v, class_name))
+        table.insert(choices, { get_full_meth(v, class_name) })
     end
     require("cpp-tools.menu").show_menu(choices, function(sel)
-        if sel == "None" then
+        if sel[1] == "None" then
             return
-        elseif sel == "All" then
+        elseif sel[1] == "All" then
             local lines = {}
-            for _, value in pairs(choices) do
-                if value ~= "All" and value ~= "None" then
-                    table.insert(lines, value)
+            for _, v in pairs(choices) do
+                if v[1] ~= "All" and v[1] ~= "None" then
+                    table.insert(lines, v[1])
                     table.insert(lines, "{")
                     table.insert(lines, "	")
                     table.insert(lines, "}")
@@ -94,7 +91,7 @@ function M.retrieve_methods(class_name, hh_buffer, cc_buffer, cc_line)
             end
             vim.api.nvim_buf_set_text(cc_buffer, cc_line - 1, 0, cc_line - 1, 0, lines)
         else
-            vim.api.nvim_buf_set_text(cc_buffer, cc_line - 1, 0, cc_line - 1, 0, { "", sel, "{", "	", "}" })
+            vim.api.nvim_buf_set_text(cc_buffer, cc_line - 1, 0, cc_line - 1, 0, { "", sel[1], "{", "	", "}" })
         end
     end, "Chose method to implement")
 end

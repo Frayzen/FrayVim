@@ -25,11 +25,11 @@ function M.retrieve_classes()
         table.insert(classes, t(match[1], buffer))
     end
     if #classes == 1 then
-        require("cpp-tools.method_retriever").hh_methods(classes[1], buffer, cur, cur_line)
+        require("cpp-tools.method_retriever").retrieve_methods(classes[1], buffer, cur, cur_line)
         return
     end
     require("cpp-tools.menu").show_menu(classes, function(sel)
-        require("cpp-tools.method_retriever").hh_methods(sel, buffer, cur, cur_line)
+        require("cpp-tools.method_retriever").retrieve_methods(sel, buffer, cur, cur_line)
     end, "Chose Class")
 end
 
