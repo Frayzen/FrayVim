@@ -17,15 +17,15 @@ lsp_params = {
             -- })
         end,
     },
-    lua_ls = {
-        settings = {
-            Lua = {
-                completion = {
-                    callSnippet = "Replace",
-                },
-            },
-        },
-    },
+    -- lua_ls = {
+    -- 	settings = {
+    -- 		Lua = {
+    -- 			completion = {
+    -- 				callSnippet = "Replace",
+    -- 			},
+    -- 		},
+    -- 	},
+    -- },
     asm_lsp = {},
     rust_analyzer = {
         cmd = {
