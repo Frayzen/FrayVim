@@ -33,4 +33,8 @@ function M.retrieve_classes()
     end, "Chose Class")
 end
 
+function M.get_cur_namespace()
+    return get_namespace_list("", ts.get_node(), vim.api.nvim_get_current_buf())
+end
+
 return M

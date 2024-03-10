@@ -16,7 +16,7 @@ local qs_cc = [[
 (function_definition) @meth
 ]]
 
-local function get_method(buffer, qs, class_name)
+local function get_method(buffer, qs, base_namespace, class_name)
     local parser = ts.get_parser(buffer)
     local tree = parser:parse()[1]
     local root = tree:root()
@@ -26,32 +26,31 @@ local function get_method(buffer, qs, class_name)
     for _, match, _ in query:iter_matches(root, buffer) do
         for id, node in pairs(match) do
             if query.captures[id] == "meth" then
-                local val = parse_meth(node, buffer, class_name)
-                methods[mth_to_str(val, true)] = val
+                local val = parse_meth(node, buffer, class_name, base_namespace)
+                if val ~= nil then
+                    methods[mth_to_str(val, true)] = val
+                end
             end
         end
     end
     return methods
 end
 
-function M.cc_methods(cc_buffer)
-    return get_method(cc_buffer, qs_cc)
+function M.cc_methods(cc_buffer, base_namespace)
+    return get_method(cc_buffer, qs_cc, base_namespace)
 end
 
-function M.hh_methods(hh_buffer, class_name)
+function M.hh_methods(hh_buffer, class_name, base_namespace)
     class_name = class_name or ".*"
     local qs = qs_hh:gsub("class_name", class_name)
-    local methods = get_method(hh_buffer, qs, class_name)
+    local methods = get_method(hh_buffer, qs, base_namespace, class_name)
     return methods
 end
 
 function M.retrieve_unimplemented(class_name, hh_buffer, cc_buffer)
-    local implemented = M.cc_methods(cc_buffer)
-    local all = M.hh_methods(hh_buffer, class_name)
-    print("IMP")
-    print(vim.inspect(implemented))
-    print("ALL")
-    print(vim.inspect(all))
+    local cur_namespace = require("cpp-tools.class_retriever").get_cur_namespace()
+    local implemented = M.cc_methods(cc_buffer, cur_namespace)
+    local all = M.hh_methods(hh_buffer, class_name, cur_namespace)
     for k, _ in pairs(implemented) do
         all[k] = nil
     end

@@ -41,38 +41,22 @@ local function find_all(node, type)
 end
 
 function M.refactor_method()
-    local method = require("cpp-tools.method_retriever").get_hovered()
-    if method == nil then
+    local method_node = require("cpp-tools.method_retriever").get_hovered()
+    if method_node == nil then
         print("Method not found")
     end
-    local parser = ts.get_parser(vim.api.nvim_get_current_buf())
-    local lang = parser:lang()
-    local name = t(find(method, "identifier"))
-    local namespaces = find_all(method, "namespace_identifier")
-    local class_name = nil
-    if #namespaces ~= 0 then
-        class_name = t(namespaces[#namespaces])
-    end
-
     local cc_buf = vim.api.nvim_get_current_buf()
+    local base_namespace = require("cpp-tools.class_retriever").get_cur_namespace()
+    local method = parse_meth(method_node, cc_buf, "", base_namespace)
+
     local hh_buf = vim.fn.bufadd(get_hh_name())
     vim.fn.bufload(hh_buf)
 
-    local query = ts.query.parse(lang, qs)
-    local cur = {}
-    for _, match, _ in query:iter_matches(method, cc_buf) do
-        cur = get_meth(match, query.captures, cc_buf)
-    end
-
-    local unimplemented = require("cpp-tools.method_retriever").retrieve_unimplemented(class_name, hh_buf, cc_buf)
-    local choices = {}
-    for _, v in pairs(unimplemented) do
-        choices[mth_to_str(v)] = v
-    end
-    require("cpp-tools.menu").show_menu(choices, function(key, value)
-        v = sel[2]
-        local replacment = mth_to_str(cur) .. ";"
-        local line = v["line"]
+    local unimplemented = require("cpp-tools.method_retriever").retrieve_unimplemented(method["class"], hh_buf, cc_buf)
+    local choices = table_to_list(unimplemented)
+    require("cpp-tools.menu").show_menu(choices, function(sel)
+        local replacment = mth_to_str(method, true) .. ";"
+        local line = sel["line"]
         vim.api.nvim_buf_set_lines(hh_buf, line, line + 1, false, { replacment })
         vim.api.nvim_buf_call(hh_buf, function()
             vim.cmd(":w")
