@@ -66,13 +66,12 @@ function M.refactor_method()
 
     local unimplemented = require("cpp-tools.method_retriever").retrieve_unimplemented(class_name, hh_buf, cc_buf)
     local choices = {}
-    for k, v in pairs(unimplemented) do
-        print(get_full_meth(v, class_name))
-        table.insert(choices, { get_full_meth(v, class_name), v })
+    for _, v in pairs(unimplemented) do
+        choices[mth_to_str(v)] = v
     end
-    require("cpp-tools.menu").show_menu(choices, function(sel)
+    require("cpp-tools.menu").show_menu(choices, function(key, value)
         v = sel[2]
-        local replacment = get_full_meth(cur) .. ";"
+        local replacment = mth_to_str(cur) .. ";"
         local line = v["line"]
         vim.api.nvim_buf_set_lines(hh_buf, line, line + 1, false, { replacment })
         vim.api.nvim_buf_call(hh_buf, function()

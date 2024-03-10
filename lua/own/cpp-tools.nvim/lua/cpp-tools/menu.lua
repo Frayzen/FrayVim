@@ -1,7 +1,5 @@
 local M = {}
 
--- choices is a list with the display in first element
--- cb is gonna be given one of the choices
 function M.show_menu(choices, cb, name)
     local pickers = require("telescope.pickers")
     local finders = require("telescope.finders")
@@ -17,16 +15,16 @@ function M.show_menu(choices, cb, name)
                 entry_maker = function(entry)
                     return {
                         value = entry,
-                        display = entry[1],
-                        ordinal = entry[1],
+                        display = entry["key"],
+                        ordinal = entry["key"],
                     }
                 end,
             }),
             attach_mappings = function(prompt_bufnr, _)
                 actions.select_default:replace(function()
                     actions.close(prompt_bufnr)
-                    local selection = action_state.get_selected_entry()
-                    cb(selection["value"])
+                    local val = action_state.get_selected_entry()
+                    cb(val["value"])
                 end)
                 return true
             end,
