@@ -8,17 +8,20 @@ function mth_to_str(meth, simple)
         if #meth["namespace"] ~= 0 then
             full = full .. table.concat(meth["namespace"], "::") .. "::"
         end
-        if meth["class"] ~= "" then
-            full = full .. meth["class"] .. "::"
-        end
     end
     full = full .. meth["name"] .. "(" .. meth["params"] .. ")"
     return full
 end
 
-function get_hh_name()
+function get_hh_buff()
+    if vim.fn.expand("%:e") == "hh" then
+        print("Cannot do that in a header file")
+        return nil
+    end
     local name = vim.fn.expand("%:r")
-    return name .. ".hh"
+    local buf = vim.fn.bufadd(name .. ".hh")
+    vim.fn.bufload(buf)
+    return buf
 end
 
 function t(node, buf)
@@ -52,26 +55,22 @@ function get_namespace_list(namespace_str, node, buf)
     return current
 end
 
-function parse_meth(node, buffer, default_class, base_namespace)
+function parse_meth(node, buffer, base_namespace)
     buffer = buffer or vim.api.nvim_get_current_buf()
     local text = t(node, buffer)
     local type = "(.-)%s*"
     local namespace = "([a-zA-Z_:]-)"
-    local class = "([a-zA-Z_]-)"
     local name = "([a-zA-Z_]+)%("
     local params = "(.*)%)"
-    local pattern = string.format("^%s%s%s:?:?%s%s", type, namespace, class, name, params)
-    _, _, type, namespace, class, name, params = string.find(text, pattern)
+    local pattern = string.format("^%s%s%s%s", type, namespace, name, params)
+    _, _, type, namespace, name, params = string.find(text, pattern)
     if name == nil then
         error("Error parsing " .. text, nil)
-    end
-    if class == "" then
-        class = default_class
     end
     if namespace ~= "" then
         namespace = namespace:sub(1, -3)
     end
-    local namespace = get_namespace_list(namespace, node, buffer)
+    namespace = get_namespace_list(namespace, node, buffer)
     for _, v in pairs(base_namespace) do
         if namespace[1] ~= v then
             return nil
@@ -80,7 +79,7 @@ function parse_meth(node, buffer, default_class, base_namespace)
     end
     return {
         type = type,
-        class = class,
+        class = namespace[#namespace],
         name = name,
         namespace = namespace,
         line = node:start(),
@@ -88,12 +87,18 @@ function parse_meth(node, buffer, default_class, base_namespace)
     }
 end
 
-function table_to_list(tbl)
+function get_current_namespace()
+    return get_namespace_list("", ts.get_node(), vim.api.nvim_get_current_buf())
+end
+
+function table_to_list(tbl, check)
     local ret = {}
     for k, v in pairs(tbl) do
-        local val = v
-        val["key"] = k
-        table.insert(ret, val)
+        if not check or check(k, v) then
+            local val = v
+            val["key"] = k
+            table.insert(ret, val)
+        end
     end
     return ret
 end

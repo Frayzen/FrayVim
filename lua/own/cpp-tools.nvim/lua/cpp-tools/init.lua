@@ -7,7 +7,7 @@ function M.setup(opts)
 end
 
 function M.implement()
-    require("cpp-tools.class_retriever").retrieve_classes()
+    require("cpp-tools.method_retriever").retrieve_methods()
 end
 
 function M.refactor()
