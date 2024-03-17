@@ -1,15 +1,13 @@
 -- LSP
-
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		"williamboman/mason.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 		"folke/neodev.nvim",
 	},
-    opts = {
-        inlay_hints = { enabled = true },
-    },
+	opts = {
+		inlay_hints = { enabled = true },
+	},
 	config = function()
 		require("telescope").load_extension("ui-select")
 
@@ -34,11 +32,11 @@ return {
 						["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
 						["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to declaration" },
 					},
-                    v = {
+					v = {
 						["<M-CR>"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
 						["<Leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
 						["<Leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
-                    }
+					},
 				})
 			end,
 		})

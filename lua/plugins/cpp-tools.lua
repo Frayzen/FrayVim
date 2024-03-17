@@ -1,5 +1,6 @@
 return {
-    "Frayzen/cpp-tools.nvim",
+    dir = '~/Code/cpp-tools.nvim',
+    -- "Frayzen/cpp-tools.nvim",
     config = function()
         require("cpp-tools").setup()
         require("which-key").register({
