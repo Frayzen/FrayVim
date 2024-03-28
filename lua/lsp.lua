@@ -36,7 +36,7 @@ local lsp_params = {
 	autotools_ls = {},
 }
 
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
 for k, v in pairs(lsp_params) do
-    lspconfig[k].setup(v)
+	lspconfig[k].setup(v)
 end
