@@ -2,6 +2,7 @@ vim.opt.filetype = "on"
 vim.opt.filetype.plugin = "on"
 vim.opt.filetype.indent = "on"
 vim.opt.expandtab = true
+vim.opt.cmdheight = 0
 
 vim.opt.number = true
 vim.opt.autoread = true
@@ -19,5 +20,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     callback = function()
         local buf = vim.api.nvim_get_current_buf()
         vim.api.nvim_buf_set_option(buf, "filetype", "c")
+    end,
+})
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = { "*.vert", "*.frag", "*.vs", "*.fs" },
+    callback = function()
+        vim.opt.filetype = "glsl"
     end,
 })

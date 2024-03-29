@@ -20,6 +20,7 @@ return {
 				register_mapping({
 					n = {
 						["<Leader>k"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
+						["<Leader>K"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Signature help" },
 						["<Leader>F"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
 						["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
 						["<M-CR>"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
