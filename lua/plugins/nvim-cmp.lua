@@ -104,24 +104,17 @@ return {
                     end
                 end, { "i", "s" }),
 
-                -- ... Your other mappings ...
+                -- ...
+                -- Your
+                -- other
+                -- mappings
+                -- ...
             },
             sources = cmp.config.sources({
                 {
                     name = "nvim_lsp",
                     keyword_length = 1,
-                    entry_filter = function(entry, _)
-                        local types = require("cmp.types")
-                        if types.lsp == nil then
-                            return true
-                        end
-                        local kind = types.lsp.CompletionItemKind[entry:get_kind()]
-
-                        if kind == "Text" then
-                            return false
-                        end
-                        return true
-                    end,
+                    priority = 100,
                 },
                 { name = "luasnip", keyword_length = 1 }, -- For luasnip users.
             }, {
