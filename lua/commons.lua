@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     end,
 })
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    pattern = { "*.vert", "*.frag", "*.vs", "*.fs" },
+    pattern = { "*.vert", "*.frag", "*.vs", "*.fs", "*.comp", "*.glsl" },
     callback = function()
         vim.opt.filetype = "glsl"
     end,
