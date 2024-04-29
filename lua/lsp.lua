@@ -38,6 +38,8 @@ local lsp_params = {
     pylsp = {},
     glslls = {},
     ocamllsp = {},
+    tsserver = {},
+    jsonls = {},
 }
 
 local lspconfig = require("lspconfig")

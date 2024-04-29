@@ -6,7 +6,14 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
-        require("nvim-tree").setup({})
+        require("nvim-tree").setup({
+            filters = {
+                custom = { "^.git$" },
+                exclude = {
+                    "^.*test.*$",
+                },
+            },
+        })
         local api = require("nvim-tree.api")
         register_mapping({
             n = {
