@@ -1,6 +1,6 @@
 return {
-    -- dir = '~/Code/cpp-tools.nvim',
-    "Frayzen/cpp-tools.nvim",
+    dir = "~/Code/cpp-tools.nvim",
+    -- "Frayzen/cpp-tools.nvim",
     config = function()
         require("cpp-tools").setup()
         require("which-key").register({
@@ -11,6 +11,12 @@ return {
                         require("cpp-tools").implement()
                     end,
                     "Implement",
+                },
+                c = {
+                    function()
+                        require("cpp-tools").create()
+                    end,
+                    "Create",
                 },
                 r = {
                     function()
