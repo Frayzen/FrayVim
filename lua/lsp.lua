@@ -41,19 +41,22 @@ local lsp_params = {
                 configurationSources = { "flake8" },
                 plugins = {
                     flake8 = {
-                        enabled = false,
+                        enabled = true,
                         ignore = { "E501", "E231" },
                         maxLineLength = 88,
                     },
                     black = { enabled = true },
-                    autopep8 = { enabled = false },
-                    mccabe = { enabled = false },
+                    autopep8 = { enabled = true },
+                    mccabe = { enabled = true },
                     pycodestyle = {
-                        enabled = false,
+                        enabled = true,
                         ignore = { "E501", "E231" },
                         maxLineLength = 88,
                     },
                     pyflakes = { enabled = false },
+                    rope_completion = {
+                        enabled = true,
+                    },
                 },
             },
         },
@@ -64,6 +67,9 @@ local lsp_params = {
     jsonls = {},
 }
 
+if os.execute("test -d venv") == 0 then
+    vim.fn.setenv("PYTHONPATH", "./venv")
+end
 local lspconfig = require("lspconfig")
 for k, v in pairs(lsp_params) do
     lspconfig[k].setup(v)
