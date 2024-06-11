@@ -149,15 +149,15 @@ return {
             },
         })
 
-        -- Insert mid section. You can make any number of sections in neovim :)
-        -- for lualine it's any number greater then 2
-        ins_left({
-            function()
-                return "%="
-            end,
-        })
+        -- -- Insert mid section. You can make any number of sections in neovim :)
+        -- -- for lualine it's any number greater then 2
+        -- ins_left({
+        --     function()
+        --         return "%="
+        --     end,
+        -- })
 
-        ins_left({
+        ins_right({
             -- Lsp server name .
             function()
                 local msg = "No Active Lsp"
@@ -197,6 +197,27 @@ return {
             "branch",
             icon = "",
             color = { fg = colors.violet, gui = "bold" },
+        })
+
+        spmapi = require("supermaven-nvim.api")
+        ins_right({
+            function()
+                return "⚙"
+            end,
+            color = function()
+                local ran, col = pcall(function()
+                    if spmapi.is_running() then
+                        return colors.green
+                    else
+                        return colors.red
+                    end
+                end)
+                if not ran then
+                    return { fg = colors.gray }
+                end
+                return { fg = col }
+            end,
+            padding = { left = 1 },
         })
 
         ins_right({

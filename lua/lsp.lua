@@ -65,10 +65,15 @@ local lsp_params = {
     ocamllsp = {},
     tsserver = {},
     jsonls = {},
+    html = {},
+    emmet_ls = {},
 }
 
 if os.execute("test -d venv") == 0 then
-    vim.fn.setenv("PYTHONPATH", "./venv")
+    local path = vim.fn.getcwd() .. "/venv"
+    local cur = os.getenv("PYTHONPATH")
+    cur = cur and cur .. ":" or ""
+    vim.fn.setenv("PYTHONPATH", cur .. path)
 end
 local lspconfig = require("lspconfig")
 for k, v in pairs(lsp_params) do
