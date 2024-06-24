@@ -122,6 +122,15 @@ return {
                 { name = "luasnip", keyword_length = 1 }, -- For luasnip users.
             }, {
                 { name = "buffer" },
+                -- { name = "async_path" },
+                {
+                    name = "path",
+                    option = {
+                        get_cwd = function()
+                            return vim.fn.getcwd()
+                        end,
+                    },
+                },
             }),
         })
 

@@ -65,8 +65,13 @@ local lsp_params = {
     ocamllsp = {},
     tsserver = {},
     jsonls = {},
-    html = {},
-    emmet_ls = {},
+    html = {
+        filetypes = { "twig", "html", "templ" },
+    },
+    twiggy_language_server = {},
+    emmet_ls = {
+        filetypes = { "twig", "html", "templ", "javascriptreact" },
+    },
 }
 
 if os.execute("test -d venv") == 0 then
