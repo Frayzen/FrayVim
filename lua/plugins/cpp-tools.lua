@@ -3,27 +3,28 @@ return {
     "Frayzen/cpp-tools.nvim",
     config = function()
         require("cpp-tools").setup()
-        require("which-key").register({
-            ["<Leader>t"] = {
-                name = "tools",
-                i = {
-                    function()
-                        require("cpp-tools").implement()
-                    end,
-                    "Implement",
-                },
-                c = {
-                    function()
-                        require("cpp-tools").create()
-                    end,
-                    "Create",
-                },
-                r = {
-                    function()
-                        require("cpp-tools").refactor()
-                    end,
-                    "Refactor",
-                },
+        require("which-key").add({
+            { "<Leader>t", group = "tools" },
+            {
+                "<Leader>i",
+                function()
+                    require("cpp-tools").implement()
+                end,
+                desc = "Implement",
+            },
+            {
+                "<Leader>c",
+                function()
+                    require("cpp-tools").create()
+                end,
+                desc = "Create",
+            },
+            {
+                "<Leader>r",
+                function()
+                    require("cpp-tools").refactor()
+                end,
+                desc = "Refactor",
             },
         })
     end,

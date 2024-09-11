@@ -5,10 +5,10 @@ return {
         -- vim.cmd("autocmd FileType apache setlocal commentstring=
         register_mapping({
             n = {
-                ["<Leader>/"] = { "<Plug>CommentaryLine", "Toggle comment" },
+                { "<Leader>/", "<Plug>CommentaryLine", desc = "Toggle comment" },
             },
             v = {
-                ["<Leader>/"] = { "<Plug>Commentary", "Toggle comment" },
+                { "<Leader>/", "<Plug>Commentary", desc = "Toggle comment" },
             },
         })
     end,

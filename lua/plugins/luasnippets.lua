@@ -4,7 +4,7 @@ return {
     config = function()
         register_mapping({
             n = {
-                ["<Leader>S"] = { "<cmd>lua require('luasnip.loaders').edit_snippet_files() <CR>", "Edit snippets" },
+                { "<Leader>S", "<cmd>lua require('luasnip.loaders').edit_snippet_files() <CR>", desc = "Edit snippets" },
             },
         })
 

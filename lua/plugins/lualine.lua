@@ -199,27 +199,6 @@ return {
             color = { fg = colors.violet, gui = "bold" },
         })
 
-        spmapi = require("supermaven-nvim.api")
-        ins_right({
-            function()
-                return "⚙"
-            end,
-            color = function()
-                local ran, col = pcall(function()
-                    if spmapi.is_running() then
-                        return colors.green
-                    else
-                        return colors.red
-                    end
-                end)
-                if not ran then
-                    return { fg = colors.gray }
-                end
-                return { fg = col }
-            end,
-            padding = { left = 1 },
-        })
-
         ins_right({
             "diff",
             -- Is it me or the symbol for modified us really weird

@@ -17,44 +17,42 @@ end
 
 mappings = {
     n = {
-        ["<esc><esc>"] = { "<cmd>noh<CR>", "Remove highlitghting" },
-        ["<Leader>f"] = {
-            name = "Find",
-        },
-        ["<Leader>j"] = {
-            name = "Java",
-        },
-
-        ["<Leader>L"] = { "<cmd>Lazy<CR>", "Lazy" },
-    },
-    v = {
-        ["R"] = { select_visual, "Replace all" },
+        { "<esc><esc>", "<cmd>noh<CR>",       desc = "Remove highlitghting" },
+        { "<Leader>f,", group = "Find" },
+        { "<Leader>j,", group = "Java" },
+        { "<Leader>x",  group = "Quickfix" },
+        { "<Leader>n",  "<cmd>cnext<cr>",     desc = "Next quickfix" },
+        { "<Leader>p",  "<cmd>cprevious<cr>", desc = "Previous quickfix" },
+        { "<Leader>o",  "<cmd>copen<cr>",     desc = "Open quickfix" },
+        { "<Leader>c",  "<cmd>cclose<cr>",    desc = "Close quickfix" },
+        { "<Leader>L",  "<cmd>Lazy<CR>",      desc = "Lazy" },
     },
 }
 function register_mapping(m)
     local wk = require("which-key")
     for k, v in pairs(m) do
-        wk.register(v, {
+        wk.add({
             mode = k,
+            v,
         })
     end
 end
 
 -- WICH-KEY UNRELATED KEYMAPS
 
-function map(mode, shortcut, command)
-    if mode == "all" then
-        map("n", shortcut, command)
-        map("i", shortcut, command)
-        map("v", shortcut, command)
-        map("t", shortcut, command)
-        map("x", shortcut, command)
-    else
-        vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-    end
-end
+-- function map(mode, shortcut, command)
+--     if mode == "all" then
+--         map("n", shortcut, command)
+--         map("i", shortcut, command)
+--         map("v", shortcut, command)
+--         map("t", shortcut, command)
+--         map("x", shortcut, command)
+--     else
+--         vim.api.jvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+--     end
+-- end
 
-map("all", "<C-h>", "<C-w>h")
-map("all", "<C-j>", "<C-w>j")
-map("all", "<C-k>", "<C-w>k")
-map("all", "<C-l>", "<C-w>l")
+-- map("all", "<C-h>", "<C-w>h")
+-- map("all", "<C-j>", "<C-w>j")
+-- map("all", "<C-k>", "<C-w>k")
+-- map("all", "<C-l>", "<C-w>l")

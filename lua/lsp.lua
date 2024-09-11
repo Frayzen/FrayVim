@@ -3,7 +3,7 @@ local lsp_params = {
         on_attach = function()
             register_mapping({
                 n = {
-                    ["<Leader><Tab>"] = { "<cmd>ClangdSwitchSourceHeader<CR>", "Swap source / header" },
+                    { "<Leader><Tab>", "<cmd>ClangdSwitchSourceHeader<CR>", desc = "Swap source / header" },
                 },
             })
         end,
@@ -35,35 +35,35 @@ local lsp_params = {
     },
     autotools_ls = {},
     dockerls = {},
-    pylsp = {
-        settings = {
-            pylsp = {
-                configurationSources = { "flake8" },
-                plugins = {
-                    flake8 = {
-                        enabled = true,
-                        ignore = { "E501", "E231" },
-                        maxLineLength = 88,
-                    },
-                    black = { enabled = true },
-                    autopep8 = { enabled = true },
-                    mccabe = { enabled = true },
-                    pycodestyle = {
-                        enabled = true,
-                        ignore = { "E501", "E231" },
-                        maxLineLength = 88,
-                    },
-                    pyflakes = { enabled = false },
-                    rope_completion = {
-                        enabled = true,
-                    },
-                },
-            },
-        },
-    },
+    pyright = {},
+    -- pylsp = {
+    --     settings = {
+    --         pylsp = {
+    --             configurationSources = { "flake8" },
+    --             plugins = {
+    --                 flake8 = {
+    --                     enabled = true,
+    --                     ignore = { "E501", "E231" },
+    --                     maxLineLength = 88,
+    --                 },
+    --                 black = { enabled = true },
+    --                 autopep8 = { enabled = true },
+    --                 mccabe = { enabled = true },
+    --                 pycodestyle = {
+    --                     enabled = true,
+    --                     ignore = { "E501", "E231" },
+    --                     maxLineLength = 88,
+    --                 },
+    --                 pyflakes = { enabled = false },
+    --                 rope_completion = {
+    --                     enabled = true,
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- },
     glslls = {},
     ocamllsp = {},
-    tsserver = {},
     jsonls = {},
     html = {
         filetypes = { "twig", "html", "templ" },
@@ -72,6 +72,8 @@ local lsp_params = {
     emmet_ls = {
         filetypes = { "twig", "html", "templ", "javascriptreact" },
     },
+    cssls = {},
+    dartls = {},
 }
 
 if os.execute("test -d venv") == 0 then

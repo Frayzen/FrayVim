@@ -17,12 +17,13 @@ return {
         local api = require("nvim-tree.api")
         register_mapping({
             n = {
-                ["<Leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle nvim tree" },
-                ["?"] = {
+                { "<Leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle nvim tree" },
+                {
+                    "?",
                     function()
                         api.tree.toggle_help()
                     end,
-                    "Toggle help for nvim tree",
+                    desc = "Toggle help for nvim tree",
                 },
             },
         })

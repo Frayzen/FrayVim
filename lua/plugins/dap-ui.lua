@@ -14,7 +14,7 @@ return {
         dap.listeners.before.event_exited["dapui_config"] = function()
             -- dapui.close()
         end
-        register_mapping({ n = { ["<Leader>d"] = { name = "Debugger" } } })
+        register_mapping({ n = { { "<Leader>d", group = "Debugger" } } })
     end,
     keys = {
         {

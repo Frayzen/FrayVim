@@ -35,13 +35,14 @@ return {
 		})
 		require("telescope").load_extension("refactoring")
 
-		require("which-key").register({
-			["<Leader>R"] = {
-				function()
-					require("telescope").extensions.refactoring.refactors()
-				end,
-				"Refactor",
-			},
-		}, { mode = { "n", "v" } })
+		--		require("which-key").register({
+		--			{
+		--				"<Leader>R",
+		--				function()
+		--					require("telescope").extensions.refactoring.refactors()
+		--				end,
+		--				"Refactor",
+		--			},
+		--		}, { mode = { "n" } })
 	end,
 }
