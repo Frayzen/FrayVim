@@ -30,7 +30,7 @@ return {
             formatting = {
                 format = lspkind.cmp_format({
                     mode = "symbol",
-                    maxwidth = 50,
+                    maxwidth = 30,
                     ellipsis_char = "...",
                     -- symbol_map = { Supermaven = "" },
                 }),
@@ -117,8 +117,6 @@ return {
                     keyword_length = 1,
                     priority = 100,
                 },
-                -- { name = "supermaven" },
-                { name = "doxygen" },
                 { name = "luasnip", keyword_length = 1 }, -- For luasnip users.
             }, {
                 { name = "buffer" },

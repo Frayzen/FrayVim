@@ -1,8 +1,5 @@
 {
     "diagnostics.globals": [
-        "has_words_before",
-        "complete",
-        "toggleSupermaven",
-        "spmapi"
+        "complete"
     ]
 }
