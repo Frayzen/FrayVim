@@ -7,8 +7,8 @@ vim.opt.cmdheight = 0
 vim.opt.number = true
 vim.opt.autoread = true
 vim.opt.clipboard = "unnamed"
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 vim.opt.cc = "80"
 vim.opt.signcolumn = "yes:1"
 
