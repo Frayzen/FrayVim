@@ -1,4 +1,5 @@
 return {
+  -- git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
   "ThePrimeagen/git-worktree.nvim",
   dependencies = {
     "nvim-telescope/telescope.nvim",
@@ -16,7 +17,7 @@ return {
         },
 
         {
-          "<Leader>gc",
+          "<Leader>C",
           function()
             require("telescope").extensions.git_worktree.create_git_worktree()
           end,
