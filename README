@@ -1,2 +1,2 @@
 Dependencies:
-ripgrep unzip pip xclipboard
+ripgrep unzip pip xclip fzf

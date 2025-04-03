@@ -87,6 +87,8 @@ local lsp_params = {
 	cmake = {},
 }
 
+vim.lsp.log.set_level(vim.log.levels.OFF)
+
 if os.execute("test -d venv") == 0 then
 	local path = vim.fn.getcwd() .. "/venv"
 	local cur = os.getenv("PYTHONPATH")

@@ -1,0 +1,15 @@
+return {}
+-- return {
+--   "puremourning/vimspector",
+--   keys = {
+--     { "<Leader>dl", "<cmd>call vimspector#Launch()<CR>",           desc = "Launch" },
+--     { "<Leader>dS", "<cmd>call vimspector#Stop()<CR>",             desc = "Stop" },
+--     { "<Leader>di", "<cmd>call vimspector#StepInto()<CR>",         desc = "Step into" },
+--     { "<Leader>do", "<cmd>call vimspector#StepOut()<CR>",          desc = "Step out" },
+--     { "<Leader>dn", "<cmd>call vimspector#StepOver()<CR>",         desc = "Next" },
+--     { "<Leader>db", "<cmd>call vimspector#ToggleBreakpoint()<CR>", desc = "Toggle breakpoint" },
+--     { "<Leader>dc", "<cmd>call vimspector#Continue()<CR>",         desc = "Continue" },
+--     { "<Leader>dr", "<cmd>call vimspector#Reset()<CR>",            desc = "Reset" },
+--   },
+--   config = function() end,
+-- }
