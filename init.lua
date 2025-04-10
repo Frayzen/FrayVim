@@ -21,3 +21,8 @@ require("lazy").setup("plugins")
 
 -- SETUP LSP
 require("lsp")
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = {"*.md", "*.tex"},
+    command = "set filetype=tex"
+})
+
