@@ -9,7 +9,8 @@ return {
       -- General plugin settings
       vim.g.mkdp_filetypes = { "markdown" }
       vim.g.mkdp_auto_close = 0  -- Allow multiple previews
-      vim.g.mkdp_refresh_slow = 1 -- Better performance
+      vim.g.mkdp_theme = 'dark'
+      -- vim.g.mkdp_refresh_slow = 1 -- Better performance
 
       -- Port-specific preview commands
       vim.api.nvim_create_user_command('MarkdownPreview8001', function()
