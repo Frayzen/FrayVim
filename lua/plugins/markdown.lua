@@ -43,16 +43,15 @@ return {
   },
 
   -- Basic Markdown Support
-  {
-    'preservim/vim-markdown',
-    ft = 'markdown',
-    config = function()
-      vim.g.vim_markdown_math = 1
-      vim.g.vim_markdown_conceal = 1
-      vim.g.vim_markdown_folding_disabled = 1
-    end
-  },
-
+  -- {
+  --   'preservim/vim-markdown',
+  --   ft = 'markdown',
+  --   config = function()
+  --     vim.g.vim_markdown_math = 1
+  --     vim.g.vim_markdown_conceal = 1
+  --     vim.g.vim_markdown_folding_disabled = 1
+  --   end
+  -- },
   -- Enhanced Markdown Features
   {
     "n-crespo/nvim-markdown",
