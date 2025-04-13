@@ -41,6 +41,50 @@ return {
       })
     end
   },
+  -- {
+  -- 'MeanderingProgrammer/render-markdown.nvim',
+  -- dependencies = {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   'echasnovski/mini.nvim' -- or your preferred icon provider
+  -- },
+  -- opts = {
+  --   -- Enable header rendering
+  --   rendering = {
+  --     headers = true, -- This is crucial
+  --     -- Other rendering options
+  --   },
+  --   -- Optional: Customize header appearance
+  --     header_highlight = {
+  --       h1 = { fg = "#ff5555", bold = true },
+  --       h2 = { fg = "#ff79c6", bold = true },
+  --       h3 = { fg = "#bd93f9", italic = true },
+  --   },
+  --   -- If using LaTeX in headers
+  --   latex = {
+  --     enabled = false,
+  --     -- Additional LaTeX options if needed
+  --   }
+  -- },
+  -- -- Important init code
+  -- init = function()
+  --   -- Verify treesitter parsers are installed
+  --   if not pcall(require, 'nvim-treesitter.parsers') then
+  --     vim.notify("Treesitter parsers not available!", vim.log.levels.ERROR)
+  --   end
+
+  --   -- Verify plugin loaded correctly
+  --   vim.api.nvim_create_autocmd('FileType', {
+  --     pattern = 'markdown',
+  --     callback = function()
+  --       if package.loaded['render-markdown'] then
+  --         vim.notify("render-markdown.nvim is active for this buffer", vim.log.levels.INFO)
+  --       else
+  --         vim.notify("render-markdown.nvim failed to load", vim.log.levels.ERROR)
+  --       end
+  --     end
+  --   })
+  -- end
+-- }
 
   -- Basic Markdown Support
   -- {
@@ -53,26 +97,26 @@ return {
   --   end
   -- },
   -- Enhanced Markdown Features
-  {
-    "n-crespo/nvim-markdown",
-    lazy = true,
-    ft = "markdown",
-    init = function()
-      vim.api.nvim_create_autocmd({ "FileType", "BufReadPost" }, {
-        pattern = { "*.md" },
-        callback = function()
-          vim.cmd("setlocal syn=tex")
-        end
-      })
-    end,
-    config = function()
-      vim.g.vim_markdown_toc_autofit = 1
-      vim.g.vim_markdown_math = 1
-      vim.keymap.set("n", "<leader>m", "<cmd>setlocal syn=markdown<CR>", {
-        silent = false,
-        desc = "Conceal Math",
-        buffer = true
-      })
-    end
-  }
+  -- {
+  --   "n-crespo/nvim-markdown",
+  --   lazy = true,
+  --   ft = "markdown",
+  --   init = function()
+  --     vim.api.nvim_create_autocmd({ "FileType", "BufReadPost" }, {
+  --       pattern = { "*.md" },
+  --       callback = function()
+  --         vim.cmd("setlocal syn=tex")
+  --       end
+  --     })
+  --   end,
+  --   config = function()
+  --     vim.g.vim_markdown_toc_autofit = 1
+  --     vim.g.vim_markdown_math = 1
+  --     vim.keymap.set("n", "<leader>m", "<cmd>setlocal syn=markdown<CR>", {
+  --       silent = false,
+  --       desc = "Conceal Math",
+  --       buffer = true
+  --     })
+  --   end
+  -- }
 }

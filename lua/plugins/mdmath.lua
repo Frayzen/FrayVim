@@ -1,43 +1,53 @@
-return {
+return 
+{
   'Thiago4532/mdmath.nvim',
   ft = 'markdown',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
-    -- Ensure single initialization
-    if vim.g.mdmath_configured then return end
+    require('mdmath').setup({
+      server_path = 'node',
+      server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
+      foreground = '#5a966b',
+      anticonceal = true,
+      dynamic = true,
+      dynamic_scale = 0.8,  -- Disable dynamic scaling
+      internal_scale = 1.5,  -- Double resolution for crisper text
+      css = [[
+        .math-render {
+          min-width: 100% !important;
+          margin: 4px 0 !important;
+          padding: 8px !important;
+          background-color: rgba(200,200,200,0.1);
+          border-radius: 4px;
+          overflow-x: auto !important;  -- Add horizontal scroll if needed
+          white-space: nowrap !important;  -- Prevent wrapping of equations
+        }
+        .math-render .katex {
+          color: #a1a784
+          display: inline-block !important;  -- Keep equations on one line
+          white-space: nowrap !important;
+        }
+      ]],
+      -- Add tex2jax configuration for better math parsing
+      tex2jax = {
+        inlineMath = [['$','$'], ['\\(','\\)']],
+        displayMath = [['$$','$$'], ['\\[','\\]']],
+        processEscapes = true,
+        ignoreClass = '.*',
+        processClass = 'math-render|math|mjx|katex'
+      }
+    })
     
-    -- Clear previous setup attempts
-    package.loaded['mdmath'] = nil
-    package.loaded['mdmath.config'] = nil
-    
-    -- Configure with error handling
-    local ok, mdmath = pcall(require, 'mdmath')
-    if ok then
-      mdmath.setup({
-        server_path = 'node',
-        server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
-        foreground = 'Normal',
-        anticonceal = true,
-        dynamic = true
-      })
-      vim.g.mdmath_configured = true  -- Set guard flag
-    else
-      vim.notify('mdmath.nvim failed to load', vim.log.levels.ERROR)
-    end
-    
-    -- Single autocommand for server management
-    vim.api.nvim_create_autocmd('VimLeave', {
-      pattern = '*',
-      once = true,
+    -- Add autocommand to prevent wrapping in markdown files
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = {'markdown', 'tex'},
       callback = function()
-        if vim.fn.executable('pkill') == 1 then
-          vim.fn.system('pkill -f "node.*mdmath"')
-        end
+        vim.opt_local.wrap = false
+        vim.opt_local.linebreak = false
       end
     })
   end,
   init = function()
-    -- Start server once per Neovim instance
     vim.fn.jobstart({
       'node', 
       vim.fn.expand('~/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js')
@@ -46,4 +56,5 @@ return {
       on_exit = function() end
     })
   end
-}
+  }
+
