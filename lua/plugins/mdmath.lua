@@ -9,6 +9,9 @@ return
       server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
       foreground = '#5a966b',
       anticonceal = true,
+
+      conceal_cursor = 'inv',  
+
       dynamic = true,
       dynamic_scale = 0.8,  -- Disable dynamic scaling
       internal_scale = 1.5,  -- Double resolution for crisper text

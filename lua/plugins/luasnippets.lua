@@ -18,7 +18,7 @@ return {
 
         -- Load snippets from absolute path
         require("luasnip.loaders.from_lua").lazy_load({
-            paths = { "~/.config/nvim/snippets" }
+          paths = { vim.fn.expand("~/.config/nvim/snippets") }
         })
 
         -- Edit snippets shortcut
