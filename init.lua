@@ -17,6 +17,10 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
+
+
+
 require("lazy").setup("plugins")  -- Loads all plugins from plugins directory
 
 -- SETUP LSP
@@ -36,21 +40,12 @@ require("lsp")
 -- ~/.config/nvim tim-java*                                          02:24:46 PM
 -- ❯ 
 -----------------------------------------------------------
--- Define highlights with FORCED rendering:
-vim.api.nvim_set_hl(0, 'RenderMarkdownH1Bg', {
-  bg = '#2E3440',
-  default = true,
-  ctermbg = 'NONE',
-  force = true  -- Critical for persistence
-})
 
-vim.api.nvim_create_autocmd({"BufEnter", "TextChanged", "TextChangedI"}, {
-  pattern = "*.md",
-  callback = function()
-    vim.schedule(function()
-      -- Force full redraw and render
-      vim.cmd([[mode]])  -- Fake mode change
-      vim.cmd([[redraw]])
-    end)
-  end
-})
+
+-- For Lua
+vim.g.python3_host_prog = vim.fn.expand('~/.conda/envs/classiq/bin/python')
+vim.g.loaded_python3_provider = 1  -- Force use of the specified Python
+
+vim.env.PYTHONPATH = "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages"
+-- vim.env.PYTHONPATH = "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages"
+

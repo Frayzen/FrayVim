@@ -1,7 +1,7 @@
 return 
 {
   'Thiago4532/mdmath.nvim',
-  ft = 'markdown',
+  ft = {'markdown', "python"},
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
     require('mdmath').setup({
@@ -10,7 +10,7 @@ return
       foreground = '#5a966b',
       anticonceal = true,
 
-      conceal_cursor = 'inv',  
+      conceal_cursor = '',  
 
       dynamic = true,
       dynamic_scale = 0.8,  -- Disable dynamic scaling

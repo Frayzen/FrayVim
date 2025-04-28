@@ -16,7 +16,7 @@ return {
       preset = 'none',
       log_level = 'error',
       log_runtime = false,
-      file_types = { 'markdown', 'tex' },
+      file_types = { 'markdown', 'tex', 'python'},
       ignore = function() return false end,
       change_events = {},
       injections = {

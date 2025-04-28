@@ -26,6 +26,7 @@ mappings = {
     { "<Leader>o",  "<cmd>copen<cr>",     desc = "Open quickfix" },
     { "<Leader>c",  "<cmd>cclose<cr>",    desc = "Close quickfix" },
     { "<Leader>L",  "<cmd>Lazy<CR>",      desc = "Lazy" },
+    -- { "<Leader>it",  "<cmd>require(\"iron.core\").toggle()<CR>",      desc = "Lazy" },
   },
 }
 function register_mapping(m)

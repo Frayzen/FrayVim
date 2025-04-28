@@ -36,16 +36,27 @@ local lsp_params = {
   autotools_ls = {},
   dockerls = {},
   pyright = {
+    root_dir = require("lspconfig.util").root_pattern(".git", "pyproject.toml", "setup.py", "requirements.txt"),
+
     settings = {
       python = {
+        -- pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python",
+        pythonPath = "/home/tim/.conda/envs/classiq/bin/python",
         analysis = {
-          typeCheckingMode = "off",    -- Optional: Enforce strict type checking
-          allowSubtypes = true,        -- Enable subclassing NewType
-          reportArgumentType = "none", -- Disable reportArgumentType errors
+          typeCheckingMode = "off", -- Optional: Enforce strict type checking
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = "workspace",
+          pythonVersion = "3.10",
+          extraPaths = {
+                "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages"
+            -- "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages"
+          }
         },
       },
     },
   },
+
   -- pylsp = {
   --   settings = {
   --     pylsp = {
@@ -99,7 +110,7 @@ local lsp_params = {
     }
   },
 }
-  
+
 
 if os.execute("test -d venv") == 0 then
   local path = vim.fn.getcwd() .. "/venv"
