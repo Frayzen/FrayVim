@@ -43,9 +43,11 @@ require("lsp")
 
 
 -- For Lua
-vim.g.python3_host_prog = vim.fn.expand('~/.conda/envs/classiq/bin/python')
+-- vim.g.python3_host_prog = vim.fn.expand('~/.conda/envs/classiq/bin/python')
+vim.g.python3_host_prog = vim.fn.expand('~/.conda/envs/qiskit/bin/python')
 vim.g.loaded_python3_provider = 1  -- Force use of the specified Python
 
-vim.env.PYTHONPATH = "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages"
+-- vim.env.PYTHONPATH = "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages"
+vim.env.PYTHONPATH = "/home/tim/.conda/envs/qiskit/lib/python3.10/site-packages"
 -- vim.env.PYTHONPATH = "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages"
 

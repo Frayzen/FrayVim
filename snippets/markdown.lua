@@ -18,6 +18,9 @@ return {
     t("\\rangle"), i(0)
   }),
 
+ s({ trig = "lan", dscr = " langle ⟩ \\langle" }, {
+    t("\\langle"), i(0)
+  }),
 
 
   -- math

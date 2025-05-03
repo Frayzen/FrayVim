@@ -23,3 +23,4 @@ return
             { silent = true, desc = "evaluate visual selection" })
     end,
 }
+

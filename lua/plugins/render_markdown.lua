@@ -1,5 +1,3 @@
--- plugins/render-markdown.lua
-
 return {
   'MeanderingProgrammer/render-markdown.nvim',
   dependencies = {
@@ -7,8 +5,8 @@ return {
     'echasnovski/mini.nvim', -- Change if using mini.icons or web-devicons instead
   },
   config = function()
-
     require('render-markdown').setup({
+
       enabled = true,
       render_modes = { 'n', 'c', 't' },
       max_file_size = 10.0,
@@ -16,8 +14,9 @@ return {
       preset = 'none',
       log_level = 'error',
       log_runtime = false,
-      file_types = { 'markdown', 'tex', 'python'},
+      file_types = { 'markdown', 'tex', 'python' },
       ignore = function() return false end,
+
       change_events = {},
       injections = {
         gitcommit = {
@@ -36,6 +35,10 @@ return {
           directives = {
             { id = 17, name = 'conceal_lines', priority = 1000, opts = { extend = true } },
             { id = 18, name = 'conceal_lines' },
+          },
+          {
+            name = 'list_item',
+            disable = true, -- <--- disables rendering of list bullets
           },
         },
       },
@@ -108,7 +111,7 @@ return {
           'RenderMarkdownH5',
           'RenderMarkdownH6',
         },
-       
+
 
       },
     })
