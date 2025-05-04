@@ -19,16 +19,26 @@ return {
 
       change_events = {},
       injections = {
-        gitcommit = {
+        python = {
           enabled = true,
           query = [[
-            ((message) @injection.content
-              (#set! injection.combined)
-              (#set! injection.include-children)
-              (#set! injection.language "markdown"))
-          ]],
+      ((comment) @injection.content
+        (#set! injection.language "markdown"))
+    ]],
         },
       },
+
+      -- injections = {
+      --   gitcommit = {
+      --     enabled = true,
+      --     query = [[
+      --       ((message) @injection.content
+      --         (#set! injection.combined)
+      --         (#set! injection.include-children)
+      --         (#set! injection.language "markdown"))
+      --     ]],
+      --   },
+      -- },
       patterns = {
         markdown = {
           disable = false,
