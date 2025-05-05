@@ -1,25 +1,4 @@
--- somewhere global
 vim.g.iron_repl_split = "horizontal botright 15 split" -- default vertical split
-
--- function ToggleIronSplit()
---   if vim.g.iron_repl_split == "vertical botright 60 split" then
---     vim.g.iron_repl_split = "horizontal botright 15 split"
---     vim.notify("Iron.nvim: Using Horizontal Split", vim.log.levels.INFO)
---   else
---     vim.g.iron_repl_split = "vertical botright 60 split"
---     vim.notify("Iron.nvim: Using Vertical Split", vim.log.levels.INFO)
---   end
-
---   -- re-set iron config
---   require("iron.core").setup {
---     config = {
---       scratch_repl = true,
---       repl_open_cmd = vim.g.iron_repl_split,
---     },
---   }
--- end
-
--- your keymap to toggle
 
 
 return {
@@ -37,17 +16,11 @@ return {
           sh = {
             command = { "zsh" }
           },
-          -- python = {
-          --   command = {"ipython", "--no-autoindent"},
-          --   format = common.bracketed_paste_python,
-          --   block_dividers = {"# %%", "#%%"},
-
-          -- },
 
           python = {
-            command = {"/home/tim/.conda/envs/qiskit/bin/ipython", "--no-autoindent"},
-            -- command = { "/home/tim/.conda/envs/ship-cudnn/bin/ipython", "--no-autoindent" },
-            -- command = { "/home/tim/.conda/envs/ship-cudnn/bin/ipython", "--no-autoindent" },
+            -- command = {"/home/tim/.conda/envs/qiskit/bin/ipython", "--no-autoindent"},
+            command = { "/home/tim/.conda/envs/ship-cudnn/bin/ipython", "--no-autoindent" },
+            -- command = {vim.g.python3_host_prog , "--no-autoindent" },
             format = require("iron.fts.common").bracketed_paste,
             block_dividers = { "# %%", "#%%" },
           },

@@ -35,22 +35,76 @@ local lsp_params = {
   },
   autotools_ls = {},
   dockerls = {},
-  pyright = {
+  jedi_language_server = {
     root_dir = require("lspconfig.util").root_pattern(".git", "pyproject.toml", "setup.py", "requirements.txt"),
 
+    init_options = {
+      workspace = {
+        -- Same extraPaths as Pyright
+        extraPaths = {
+          "/home/tim/dev/keras",
+          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages",
+          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras",
+          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src",
+          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py"
+        },
+        -- Optional: Environment variables
+        environment = "/home/tim/.conda/envs/ship-cudnn/bin/python",
+      },
+      -- Jedi-specific optimizations
+      codeAction = {
+        nameExtractVariable = "jls_extract_var",
+        nameExtractFunction = "jls_extract_def",
+      },
+      completion = {
+        disableSnippets = false,
+        resolveEagerly = true,
+      },
+      diagnostics = {
+        enable = true,
+        didOpen = true,
+        didChange = true,
+        didSave = true,
+      },
+    },
+    -- Explicit Python path (same as Pyright)
     settings = {
       python = {
-        -- pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python",
-        pythonPath = "/home/tim/.conda/envs/classiq/bin/python",
+        pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python"
+      }
+    },
+    -- Optional: Markdown formatting for hover docs
+    on_attach = function(client, bufnr)
+      client.server_capabilities.hoverProvider = true
+      client.server_capabilities.documentFormattingProvider = false -- Jedi doesn't format
+    end
+  },
+  pyright = {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.hoverProvider = false
+    end,
+    root_dir = require("lspconfig.util").root_pattern(".git", "pyproject.toml", "setup.py", "requirements.txt"),
+    settings = {
+      python = {
+        pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python",
+        -- pythonPath = "/home/tim/.conda/envs/classiq/bin/python",
+        -- pythonPath = vim.g.python3_host_prog,
         analysis = {
           typeCheckingMode = "off", -- Optional: Enforce strict type checking
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           diagnosticMode = "workspace",
+          signatureHelp = false,
           pythonVersion = "3.10",
           extraPaths = {
-                "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages"
-            -- "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages"
+
+            "/home/tim/dev/keras",
+            -- vim.env.PYTHONPATH,
+            "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages",
+            "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras",
+            "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src",
+            "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py"
+
           }
         },
       },
