@@ -23,7 +23,7 @@ return {
 
         -- Edit snippets shortcut
         vim.keymap.set("n", "<leader>S", function()
-            require("luasnip.loaders.from_lua").edit_snippet_files()
+            require("luasnip.loaders").edit_snippet_files()
         end, { desc = "Edit snippets" })
     end,
     dependencies = {

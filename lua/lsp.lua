@@ -1,3 +1,4 @@
+local util = require('lspconfig.util')
 local lsp_params = {
   clangd = {
     on_attach = function()
@@ -36,6 +37,9 @@ local lsp_params = {
   autotools_ls = {},
   dockerls = {},
   pyright = {
+    root_dir = function(fname)
+      return util.root_pattern('pyproject.toml', 'setup.py', '.git')(fname) or vim.fn.getcwd()
+    end,
     settings = {
       python = {
         analysis = {
@@ -98,6 +102,9 @@ local lsp_params = {
       }
     }
   },
+  texlab = {
+    filetypes = { "tex", "plaintex", "bib", "markdown" } -- 👈 Add markdown
+  }
 }
   
 
