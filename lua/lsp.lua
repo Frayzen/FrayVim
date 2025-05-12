@@ -1,3 +1,4 @@
+
 local lsp_params = {
   clangd = {
     on_attach = function()
@@ -41,15 +42,16 @@ local lsp_params = {
     init_options = {
       workspace = {
         -- Same extraPaths as Pyright
-        extraPaths = {
-          "/home/tim/dev/keras",
-          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages",
-          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras",
-          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src",
-          "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py"
-        },
+        -- extraPaths = {
+        --   "/home/tim/dev/keras",
+        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages",
+        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras",
+        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src",
+        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py"
+        -- },
         -- Optional: Environment variables
-        environment = "/home/tim/.conda/envs/ship-cudnn/bin/python",
+        -- environment = "/home/tim/.conda/envs/ship-cudnn/bin/python",
+        environment = "/home/tim/.conda/envs/classiq/bin/python",
       },
       -- Jedi-specific optimizations
       codeAction = {
@@ -70,7 +72,8 @@ local lsp_params = {
     -- Explicit Python path (same as Pyright)
     settings = {
       python = {
-        pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python"
+        pythonPath = "/home/tim/.conda/envs/classiq/bin/python"
+        -- pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python"
       }
     },
     -- Optional: Markdown formatting for hover docs

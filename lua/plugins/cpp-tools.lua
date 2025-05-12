@@ -6,7 +6,7 @@ return {
         require("which-key").add({
             { "<Leader>t", group = "tools" },
             {
-                "<Leader>i",
+                "<Leader>im",
                 function()
                     require("cpp-tools").implement()
                 end,

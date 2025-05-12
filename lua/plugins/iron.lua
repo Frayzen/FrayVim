@@ -19,7 +19,8 @@ return {
 
           python = {
             -- command = {"/home/tim/.conda/envs/qiskit/bin/ipython", "--no-autoindent"},
-            command = { "/home/tim/.conda/envs/ship-cudnn/bin/ipython", "--no-autoindent" },
+            command = {"/home/tim/.conda/envs/classiq/bin/ipython", "--no-autoindent"},
+            -- command = { "/home/tim/.conda/envs/ship-cudnn/bin/ipython", "--no-autoindent" },
             -- command = {vim.g.python3_host_prog , "--no-autoindent" },
             format = require("iron.fts.common").bracketed_paste,
             block_dividers = { "# %%", "#%%" },
@@ -51,7 +52,7 @@ return {
         ignore_blank_lines = true,
       },
       keymaps = {
-        send_code_block = "<space>sb",
+        send_code_block_and_move = "<space>sb",
         send_motion = "<space>sc",
         visual_send = "<space>sc",
         send_file = "<space>sf",
@@ -66,7 +67,7 @@ return {
         interrupt = "<space>s<space>",
         exit = "<space>sq",
         clear = "<space>cl",
-        toggle_repl = "<space>rr",
+        toggle_repl = "<space>ti",
         restart_repl = "<space>rR",
       }
     }

@@ -51,3 +51,4 @@ vim.g.loaded_python3_provider = 1  -- Force use of the specified Python
 vim.env.PYTHONPATH = "/home/tim/.conda/envs/qiskit/lib/python3.10/site-packages"
 -- vim.env.PYTHONPATH = "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages"
 
+
