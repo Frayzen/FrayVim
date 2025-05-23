@@ -104,7 +104,9 @@ local lsp_params = {
   },
   texlab = {
     filetypes = { "tex", "plaintex", "bib", "markdown" } -- 👈 Add markdown
-  }
+  },
+  gdscript = {},
+  ghdl_ls = {}
 }
   
 
