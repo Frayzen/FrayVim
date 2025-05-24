@@ -9,7 +9,8 @@ local lsp_params = {
       })
     end,
   },
-  lua_ls = {},
+  lua_ls = {
+  },
   asm_lsp = {},
   rust_analyzer = {
     cmd = {
@@ -106,9 +107,10 @@ local lsp_params = {
     filetypes = { "tex", "plaintex", "bib", "markdown" } -- 👈 Add markdown
   },
   gdscript = {},
-  ghdl_ls = {}
+  hdl_checker = {},
+  vhdl_ls = {},
 }
-  
+
 
 if os.execute("test -d venv") == 0 then
   local path = vim.fn.getcwd() .. "/venv"

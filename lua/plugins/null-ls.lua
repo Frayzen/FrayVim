@@ -18,16 +18,16 @@ return {
     local null_ls = require("null-ls")
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-    local checkstyle_config_path = vim.fn.expand("~") .. "/checkstyle.xml"
+    -- local checkstyle_config_path = vim.fn.expand("~") .. "/checkstyle.xml"
     local sources = {
-      -- null_ls.builtins.formatting.stylua,
-      -- null_ls.builtins.formatting.black,
-      -- null_ls.builtins.completion.spell,
-      null_ls.builtins.diagnostics.checkstyle.with({
-        -- extra_args = { "-c", "~/checkstyle.xml" }, -- or "/sun_checks.xml" or path to self written rules
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.formatting.black,
+      null_ls.builtins.completion.spell,
+      -- null_ls.builtins.null_ls.builtins.diagnostics.checkstyle.with({
+      -- extra_args = { "-c", "~/checkstyle.xml" }, -- or "/sun_checks.xml" or path to self written rules
 
-        args = { "-c", checkstyle_config_path, "-f", "sarif", "$FILENAME" },
-      }),
+      -- args = { "-c", checkstyle_config_path, "-f", "sarif", "$FILENAME" },
+      -- }),
     }
     require("null-ls").setup({
       on_attach = function(client, bufnr)
