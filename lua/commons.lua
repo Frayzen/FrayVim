@@ -4,6 +4,7 @@ vim.opt.filetype.indent = "on"
 vim.opt.expandtab = true
 vim.opt.cmdheight = 0
 
+vim.opt.modeline = false
 vim.opt.number = true
 vim.opt.autoread = true
 -- vim.opt.clipboard = "unnamed"

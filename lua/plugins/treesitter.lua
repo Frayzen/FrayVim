@@ -1,4 +1,33 @@
-return {}
+-- return {}
+return {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    require('nvim-treesitter.configs').setup({
+      ensure_installed = {
+        "markdown",
+        "markdown_inline",  -- Required for math support
+        "lua",
+        "vim",
+        "vimdoc"
+      },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      incremental_selection = {
+        enable = true,
+        disable = {"markdown"},
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
+    })
+  end
+}
 -- return {
 -- 	"nvim-treesitter/nvim-treesitter",
 -- 	config = function()

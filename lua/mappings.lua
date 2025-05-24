@@ -28,6 +28,10 @@ mappings = {
     { "<Leader>L",  "<cmd>Lazy<CR>",      desc = "Lazy" },
   },
 }
+
+vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+
 function register_mapping(m)
   local wk = require("which-key")
   for k, v in pairs(m) do
