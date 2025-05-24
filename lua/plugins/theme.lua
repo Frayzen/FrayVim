@@ -15,9 +15,13 @@
 --     end,
 -- }
 return {
-  "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000,
+  "bluz71/vim-moonfly-colors",
+  name = "moonfly",
+  lazy = false,
+  priority = 1000,
   config = function()
-    vim.cmd [[colorscheme moonfly]]
+    vim.cmd([[colorscheme moonfly]])
+    vim.cmd("hi NonText guifg=bg")
   end,
 }
 -- return {
