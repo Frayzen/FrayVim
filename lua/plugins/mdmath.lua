@@ -33,35 +33,11 @@ return
             font-size: 1.1em !important;
           }
         ]],
-      -- css = [[
-      --   .math-render {
-      --     min-width: 100% !important;
-      --     margin: 4px 0 !important;
-      --     padding: 8px !important;
-      --     background-color: rgba(200,200,200,0.1);
-      --     border-radius: 4px;
-      --     overflow-x: auto !important;  -- Add horizontal scroll if needed
-      --     white-space: nowrap !important;  -- Prevent wrapping of equations
-      --   }
-      --   .math-render .katex {
-      --     color: #a1a784
-      --     display: inline-block !important;  -- Keep equations on one line
-      --     white-space: nowrap !important;
-      --   }
-      -- ]],
-      -- Add tex2jax configuration for better math parsing
-      -- tex2jax = {
-      --   inlineMath = [['$','$'], ['\\(','\\)']],
-      --   displayMath = [['$$','$$'], ['\\[','\\]']],
-      --   processEscapes = true,
-      --   ignoreClass = '.*',
-      --   processClass = 'math-render|math|mjx|katex'
-      -- }
       tex2jax = {
   inlineMath = [['$','$'], ['\\(','\\)']],
   displayMath = [['$$','$$'], ['\\[','\\]'], ['\\begin{equation*}','\\end{equation*}'], ['\\begin{align*}','\\end{align*}']],
   processEscapes = true,
-  ignoreClass = '.*',
+  -- ignoreClass = '.*',
   processClass = 'math|math-render|katex|mjx'
 }
     })

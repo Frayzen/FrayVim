@@ -3,6 +3,7 @@ return {
     build = "make install_jsregexp",
     config = function()
         local ls = require("luasnip")
+
         
         -- Key mappings (keep your existing ones)
         vim.keymap.set({ "i", "s" }, "<M-l>", function() ls.expand_or_jump() end, { silent = true })

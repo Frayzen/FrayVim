@@ -52,3 +52,4 @@ vim.env.PYTHONPATH = "/home/tim/.conda/envs/qiskit/lib/python3.10/site-packages"
 -- vim.env.PYTHONPATH = "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages"
 
 
+

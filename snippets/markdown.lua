@@ -59,7 +59,10 @@ return {
 
   -- Generic state kets
   s({ trig = "|psi", dscr = "Generic ket |ψ⟩" }, {
-    t("|"), i(1, "\\psi"), t("\\rangle"), i(0)
+    t("|"), t("\\psi"), t("\\rangle"), i(0)
+  }),
+  s({ trig = "01", dscr = "set of 0 and 1" }, {
+    t("\\{0,1\\}"), i(0)
   }),
 
   -- Inner products
@@ -85,6 +88,27 @@ return {
     t({ "", "$$" }), -- <newline>$$
     i(0)
   }),
+  
+  s({ trig = "amth", dscr = "Multiline exp $$ input $$" }, {
+    t({ "$$", "" }), -- This creates: $$<newline>
+    t({ "\\begin{aligned}", "" }), -- This creates: $$<newline>
+    i(1, "input"),   -- Your math content
+    t({ "", "\\end{aligned}" }), -- <newline>$$
+    t({ "", "$$" }), -- <newline>$$
+    i(0)
+  }),
+
+  s({ trig = "bmth", dscr = "Multiline exp $$ input $$" }, {
+    t({ "$$", "" }), -- This creates: $$<newline>
+    t({ "\\boxed{", "" }), -- This creates: $$<newline>
+    i(1, "input"),   -- Your math content
+    t({ "", "}" }), -- <newline>$$
+    t({ "", "$$" }), -- <newline>$$
+    i(0)
+  }),
+
+
+
 
   -- fractions
   s({ trig = "fr", dscr = "Fraction \\frac{}{}" }, {

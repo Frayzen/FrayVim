@@ -9,6 +9,13 @@ local lsp_params = {
       })
     end,
   },
+  -- texlab  ={
+  --   filetypes = { "markdown" },
+
+  --   cmd = {
+  --     "texlab",
+  --   }
+  -- },
   lua_ls = {},
   asm_lsp = {},
   rust_analyzer = {
@@ -42,13 +49,6 @@ local lsp_params = {
     init_options = {
       workspace = {
         -- Same extraPaths as Pyright
-        -- extraPaths = {
-        --   "/home/tim/dev/keras",
-        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages",
-        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras",
-        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src",
-        --   "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py"
-        -- },
         -- Optional: Environment variables
         -- environment = "/home/tim/.conda/envs/ship-cudnn/bin/python",
         environment = "/home/tim/.conda/envs/classiq/bin/python",
@@ -72,8 +72,35 @@ local lsp_params = {
     -- Explicit Python path (same as Pyright)
     settings = {
       python = {
-        pythonPath = "/home/tim/.conda/envs/classiq/bin/python"
-        -- pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python"
+        pythonPath = "/home/tim/.conda/envs/classiq/bin/python",
+        extraPaths = {
+          "/home/tim/dev/keras",
+          -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages",
+          -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/",
+          -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/__init__.py",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/analyzer",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/_analyzer_extras",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/applications",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/execution",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/executor.py",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/__init__.py",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/interface",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/_internals",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/model_expansions",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/open_library",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/__pycache__",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/py.typed",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/qmod",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/synthesis.py",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/visualization.py",
+         -- "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/classiq/qmod/builtins/operations.py",
+
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/keras",
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/keras/src/__init__.py",
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/keras/src",
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py",
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/mypy_extensions.py",
+        }
       }
     },
     -- Optional: Markdown formatting for hover docs
@@ -89,8 +116,7 @@ local lsp_params = {
     root_dir = require("lspconfig.util").root_pattern(".git", "pyproject.toml", "setup.py", "requirements.txt"),
     settings = {
       python = {
-        pythonPath = "/home/tim/.conda/envs/ship-cudnn/bin/python",
-        -- pythonPath = "/home/tim/.conda/envs/classiq/bin/python",
+        pythonPath = "/home/tim/.conda/envs/classiq/bin/python",
         -- pythonPath = vim.g.python3_host_prog,
         analysis = {
           typeCheckingMode = "off", -- Optional: Enforce strict type checking
@@ -104,9 +130,11 @@ local lsp_params = {
             "/home/tim/dev/keras",
             -- vim.env.PYTHONPATH,
             "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages",
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/keras/src/__init__.py",
             "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras",
             "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src",
-            "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py"
+            "/home/tim/.conda/envs/ship-cudnn/lib/python3.10/site-packages/keras/src/layers/convolutional/conv2d.py",
+          "/home/tim/.conda/envs/classiq/lib/python3.10/site-packages/mypy_extensions.py",
 
           }
         },

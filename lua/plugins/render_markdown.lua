@@ -45,7 +45,9 @@ return {
       anti_conceal = {
         enabled = false,
         ignore = {
-          code_background = true,
+          -- code_background = true,
+          bullet =true,
+          dash = true,
           sign = true,
         },
         above = 0,
@@ -78,6 +80,9 @@ return {
           callout = function() return true end,
           checkbox = function() return true end,
         },
+      },
+      link  ={
+        enabled = false,
       },
       heading = {
         enabled = true,
