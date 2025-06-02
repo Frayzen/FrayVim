@@ -19,7 +19,7 @@ return {
 
           python = {
             -- command = {"/home/tim/.conda/envs/qiskit/bin/ipython", "--no-autoindent"},
-            command = {"/home/tim/.conda/envs/classiq/bin/ipython", "--no-autoindent"},
+            command = {"ipython", "--no-autoindent"},
             -- command = { "/home/tim/.conda/envs/ship-cudnn/bin/ipython", "--no-autoindent" },
             -- command = {vim.g.python3_host_prog , "--no-autoindent" },
             format = require("iron.fts.common").bracketed_paste,

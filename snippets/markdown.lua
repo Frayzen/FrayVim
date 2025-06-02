@@ -1,4 +1,10 @@
 return {
+s({ trig = "iff", dscr = "iff" }, {
+    t("\\Leftrightarrow"), i(0)
+  }),
+s({ trig = "imp", dscr = "implies" }, {
+    t("\\Rightarrow"), i(0)
+  }),
   s({ trig = "k0", dscr = "Ket |0⟩" }, {
     t("|0\\rangle"), i(0)
   }),
@@ -58,16 +64,22 @@ return {
 
 
   -- Generic state kets
-  s({ trig = "|psi", dscr = "Generic ket |ψ⟩" }, {
+  s({ trig = "psi", dscr = "Generic ket |ψ⟩" }, {
     t("|"), t("\\psi"), t("\\rangle"), i(0)
   }),
   s({ trig = "01", dscr = "set of 0 and 1" }, {
     t("\\{0,1\\}"), i(0)
   }),
+  s({ trig = "01n", dscr = "set of 0 and 1" }, {
+    t("\\{0,1\\}^n"), i(0)
+  }),
 
   -- Inner products
-  s({ trig = "<psi|phi>", dscr = "Inner product ⟨ψ|φ⟩" }, {
+  s({ trig = "ip", dscr = "Inner product ⟨ψ|φ⟩" }, {
     t("\\langle "), i(1, "\\psi"), t("|"), i(2, "\\phi"), t("\\rangle"), i(0)
+  }),
+s({ trig = "prj", dscr = "Projector |a><b|" }, {
+   t("|"),i(1, "b"),t("\\rangle"), t("\\langle "),   i(2, "a"), t("|"), i(0)
   }),
   -- Text eV
   s({ trig = "ev", dscr = "Electron volt \\text{eV}" }, {
@@ -145,4 +157,6 @@ return {
     t("\\mathcal{"), i(1, "input"), t("}"), i(0)
   }),
 
+
 }
+
