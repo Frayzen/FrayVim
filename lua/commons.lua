@@ -3,6 +3,7 @@ vim.opt.filetype.plugin = "on"
 vim.opt.filetype.indent = "on"
 vim.opt.expandtab = true
 vim.opt.cmdheight = 0
+vim.opt.conceallevel = 2
 
 vim.opt.modeline = false
 vim.opt.number = true

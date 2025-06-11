@@ -1,4 +1,4 @@
-local util = require('lspconfig.util')
+local util = require("lspconfig.util")
 local lsp_params = {
   clangd = {
     on_attach = function()
@@ -9,8 +9,7 @@ local lsp_params = {
       })
     end,
   },
-  lua_ls = {
-  },
+  lua_ls = {},
   asm_lsp = {},
   rust_analyzer = {
     cmd = {
@@ -39,13 +38,13 @@ local lsp_params = {
   dockerls = {},
   pyright = {
     root_dir = function(fname)
-      return util.root_pattern('pyproject.toml', 'setup.py', '.git')(fname) or vim.fn.getcwd()
+      return util.root_pattern("pyproject.toml", "setup.py", ".git")(fname) or vim.fn.getcwd()
     end,
     settings = {
       python = {
         analysis = {
-          typeCheckingMode = "off",    -- Optional: Enforce strict type checking
-          allowSubtypes = true,        -- Enable subclassing NewType
+          typeCheckingMode = "off", -- Optional: Enforce strict type checking
+          allowSubtypes = true,   -- Enable subclassing NewType
           reportArgumentType = "none", -- Disable reportArgumentType errors
         },
       },
@@ -98,19 +97,18 @@ local lsp_params = {
       markdown = {
         enable = true,
         trace = {
-          server = "verbose" -- Optional: for debugging
-        }
-      }
-    }
+          server = "verbose", -- Optional: for debugging
+        },
+      },
+    },
   },
   texlab = {
-    filetypes = { "tex", "plaintex", "bib", "markdown" } -- 👈 Add markdown
+    filetypes = { "tex", "plaintex", "bib", "markdown" }, -- 👈 Add markdown
   },
   gdscript = {},
-  hdl_checker = {},
+  -- hdl_checker = {},
   vhdl_ls = {},
 }
-
 
 if os.execute("test -d venv") == 0 then
   local path = vim.fn.getcwd() .. "/venv"

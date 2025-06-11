@@ -1,20 +1,19 @@
-return 
-{
-  'Thiago4532/mdmath.nvim',
-  ft = 'markdown',
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+return {
+  "Thiago4532/mdmath.nvim",
+  ft = "markdown",
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
-    require('mdmath').setup({
-      server_path = 'node',
-      server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
-      foreground = '#5a966b',
+    require("mdmath").setup({
+      server_path = "node",
+      server_args = { os.getenv("HOME") .. "/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js" },
+      foreground = "#5a966b",
       anticonceal = true,
 
-      conceal_cursor = 'inv',  
+      conceal_cursor = "inv",
 
       dynamic = true,
-      dynamic_scale = 0.8,  -- Disable dynamic scaling
-      internal_scale = 1.5,  -- Double resolution for crisper text
+      dynamic_scale = 0.8, -- Disable dynamic scaling
+      internal_scale = 1.5, -- Double resolution for crisper text
       css = [[
         .math-render {
           min-width: 100% !important;
@@ -36,28 +35,27 @@ return
         inlineMath = [['$','$'], ['\\(','\\)']],
         displayMath = [['$$','$$'], ['\\[','\\]']],
         processEscapes = true,
-        ignoreClass = '.*',
-        processClass = 'math-render|math|mjx|katex'
-      }
+        ignoreClass = ".*",
+        processClass = "math-render|math|mjx|katex",
+      },
     })
-    
+
     -- Add autocommand to prevent wrapping in markdown files
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = {'markdown', 'tex'},
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "markdown", "tex" },
       callback = function()
-        vim.opt_local.wrap = false
+        -- vim.opt_local.wrap = false
         vim.opt_local.linebreak = false
-      end
+      end,
     })
   end,
   init = function()
     vim.fn.jobstart({
-      'node', 
-      vim.fn.expand('~/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js')
+      "node",
+      vim.fn.expand("~/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js"),
     }, {
       detach = true,
-      on_exit = function() end
+      on_exit = function() end,
     })
-  end
-  }
-
+  end,
+}
