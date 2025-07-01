@@ -11,6 +11,7 @@ return {
     init = function()
       -- General plugin settings
       vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_browser = "google-chrome-stable"
       vim.g.mkdp_auto_close = 0  -- Allow multiple previews
       vim.g.mkdp_theme = 'dark'
       vim.g.mkdp_markdown_css = vim.fn.expand("~/.config/nvim/markdown-preview.css")

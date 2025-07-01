@@ -5,6 +5,12 @@ return
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
     require('mdmath').setup({
+      math_patterns = {
+        -- Standard $$ blocks
+        {start = "\\$\\$", stop = "\\$\\$", priority = 1},
+        -- Indented $$ blocks (4+ spaces)
+        {start = "^%s*\\$\\$", stop = "\\$\\$", priority = 2},
+      },
       server_path = 'node',
       server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
       foreground = '#5a966b',
@@ -33,13 +39,6 @@ return
             font-size: 1.1em !important;
           }
         ]],
-      tex2jax = {
-  inlineMath = [['$','$'], ['\\(','\\)']],
-  displayMath = [['$$','$$'], ['\\[','\\]'], ['\\begin{equation*}','\\end{equation*}'], ['\\begin{align*}','\\end{align*}']],
-  processEscapes = true,
-  -- ignoreClass = '.*',
-  processClass = 'math|math-render|katex|mjx'
-}
     })
 
     -- Add autocommand to prevent wrapping in markdown files

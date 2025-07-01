@@ -27,6 +27,8 @@ mappings = {
     { "<Leader>o",  "<cmd>copen<cr>",     desc = "Open quickfix" },
     { "<Leader>c",  "<cmd>cclose<cr>",    desc = "Close quickfix" },
     { "<Leader>L",  "<cmd>Lazy<CR>",      desc = "Lazy" },
+    { "<Leader>rm", [[:%s/\\(\\\|\\)/$/g<CR>]], desc = "Fix math delimiters" },
+
     -- { "<Leader>F",  "<cmd>Format<CR>",      desc = "Format" },
     -- { "<Leader>it",  "<cmd>require(\"iron.core\").toggle()<CR>",      desc = "Lazy" },
   },
