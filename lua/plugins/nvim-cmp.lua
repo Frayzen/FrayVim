@@ -127,7 +127,7 @@ return {
           keyword_length = 1,
           priority = 100,
         },
-        { name = "luasnip", keyword_length = 1, priority = 20 }, -- For luasnip users.
+        { name = "luasnip", keyword_length = 1, priority = 200 }, -- For luasnip users.
       }, {
         -- { name = "buffer", priority = 1 },
         -- { name = "async_path" },
