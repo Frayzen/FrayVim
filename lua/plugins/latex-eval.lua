@@ -18,8 +18,16 @@ return {
         function()
           require("latex-eval").evaluate_visual(true)
         end,
-        desc = "evaluate latex visual selection",
+        desc = "simplify latex visual selection",
       },
+      {
+        "<leader>bz",
+        function()
+          require("latex-eval").solve_visual(true)
+        end,
+        desc = "solve latex visual selection",
+      },
+
     })
   end,
   dependencies = {},

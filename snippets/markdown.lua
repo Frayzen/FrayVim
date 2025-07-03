@@ -26,6 +26,17 @@ return {
   s({ trig = "kt", dscr = "Ket |0⟩" }, {
     t("\\ket{"), i(1,"x"), t("}"), i(0)
   }),
+  s({ trig = "br", dscr = "Ket |0⟩" }, {
+    t("\\bra{"), i(1,"x"), t("}"), i(0)
+  }),
+  s({ trig = "al", dscr = "Ket |0⟩" }, {
+    t("\\alpha"), i(0)
+  }),
+s({ trig = "bt", dscr = "Ket |0⟩" }, {
+    t("\\beta"), i(0)
+  }),
+
+
 
 
 
