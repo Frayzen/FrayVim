@@ -26,7 +26,7 @@ require("lazy").setup("plugins")  -- Loads all plugins from plugins directory
 -- SETUP LSP
 require("lsp")
 
-
+require("custom")
 
 
 if vim.g.vscode then

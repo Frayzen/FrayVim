@@ -23,7 +23,7 @@ return {
       {
         "<leader>bz",
         function()
-          require("latex-eval").solve_visual(true)
+          require("latex-eval").solve_visual()
         end,
         desc = "solve latex visual selection",
       },
