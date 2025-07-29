@@ -11,7 +11,7 @@ return
         -- Indented $$ blocks (4+ spaces)
         { start = "^%s*\\$\\$", stop = "\\$\\$",     priority = 2 },
 
-        -- { start = "^#\\$\\$", stop = "^#\\$\\$", priority = 1 },
+        { start = "^#\\$\\$", stop = "^#\\$\\$", priority = 1 },
       },
       server_path = 'node',
       server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },

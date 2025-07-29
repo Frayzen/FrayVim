@@ -7,29 +7,58 @@ return {
   config = function()
     require('render-markdown').setup({
 
-      enabled = true,
-      render_modes = { 'n', 'c', 't' },
+      enabled       = true,
+      render_modes  = { 'n', 'c', 't' },
       max_file_size = 10.0,
-      debounce = 100,
-      preset = 'none',
-      log_level = 'error',
-      log_runtime = false,
-      file_types = { 'markdown', 'tex', 'python' },
-      ignore = function() return false end,
+      debounce      = 100,
+      preset        = 'none',
+      log_level     = 'error',
+      log_runtime   = false,
+      file_types    = { 'markdown', 'tex', 'python' },
+      ignore        = function() return false end,
 
       change_events = {},
-      injections = {
+      injections    = {
+        python = {
+          enabled = true,
+          query = [[
+  ((expression_statement
+     (string
+       (string_content) @injection.content))
+   (#set! injection.language "markdown"))
+]]
+
+        },
         gitcommit = {
           enabled = true,
           query = [[
-            ((message) @injection.content
-              (#set! injection.combined)
-              (#set! injection.include-children)
-              (#set! injection.language "markdown"))
-          ]],
+      ((message) @injection.content
+        (#set! injection.combined)
+        (#set! injection.include-children)
+        (#set! injection.language "markdown"))
+    ]],
         },
       },
-      patterns = {
+
+      -- injections    = {
+      --   python = {
+      --     enabled = true,
+      --     query = [[
+      -- ((string) @injection.content
+      --   (#set! injection.language "markdown"))
+      -- ]],
+      --   },
+      --   gitcommit = {
+      --     enabled = true,
+      --     query = [[
+      --       ((message) @injection.content
+      --         (#set! injection.combined)
+      --         (#set! injection.include-children)
+      --         (#set! injection.language "markdown"))
+      --     ]],
+      --   },
+      -- },
+      patterns      = {
         markdown = {
           disable = false,
           directives = {
@@ -42,22 +71,22 @@ return {
           },
         },
       },
-      anti_conceal = {
+      anti_conceal  = {
         enabled = false,
         ignore = {
           -- code_background = true,
-          bullet =true,
+          bullet = true,
           dash = true,
           sign = true,
         },
         above = 0,
         below = 0,
       },
-      padding = {
+      padding       = {
         highlight = 'none',
         -- highlight = 'Normal',
       },
-      latex = {
+      latex         = {
         enabled = false,
         render_modes = false,
         converter = 'latex2text',
@@ -66,13 +95,13 @@ return {
         top_pad = 0,
         bottom_pad = 0,
       },
-      on = {
+      on            = {
         attach = function() end,
         initial = function() end,
         render = function() end,
         clear = function() end,
       },
-      completions = {
+      completions   = {
         blink = { enabled = false },
         coq = { enabled = false },
         lsp = { enabled = false },
@@ -81,10 +110,10 @@ return {
           checkbox = function() return true end,
         },
       },
-      link  ={
+      link          = {
         enabled = false,
       },
-      heading = {
+      heading       = {
         enabled = true,
         render_modes = false,
         atx = true,
