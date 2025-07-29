@@ -13,7 +13,7 @@ return {
                 desc = "Implement",
             },
             {
-                "<Leader>c",
+                "<Leader>cc",
                 function()
                     require("cpp-tools").create()
                 end,

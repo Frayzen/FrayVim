@@ -10,6 +10,7 @@ return {
     config = function()
         require("telescope").load_extension("ui-select")
 
+
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(ev)
@@ -20,7 +21,8 @@ return {
                     n = {
                         { "<Leader>k",  "<cmd>lua vim.lsp.buf.signature_help()<CR>",         desc = "Signature help" },
                         { "<Leader>K",  "<cmd>lua vim.diagnostic.open_float()<CR>",          desc = "Signature help" },
-                        { "<Leader>F",  ":Format<CR>", desc = "Format" },
+                        -- { "<Leader>F",  ":Format<CR>", desc = "Format" },
+                        { "<Leader>F",  "<cmd>lua vim.lsp.buf.format()<CR>", desc = "Format" },
                         { "gr",         "<cmd>lua vim.lsp.buf.references()<CR>",             desc = "References" },
                         { "<M-CR>",     "<cmd>lua vim.lsp.buf.code_action()<CR>",            desc = "Code action" },
                         { "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>",            desc = "Code action" },

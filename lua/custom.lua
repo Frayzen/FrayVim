@@ -59,4 +59,10 @@ end
 
 vim.keymap.set('n', '<leader>cf', copy_current_function, { desc = "Copy current function to clipboard" })
 
-
+-- python format on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.py" },
+  callback = function()
+    vim.cmd("Format")
+  end,
+})
