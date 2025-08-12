@@ -32,7 +32,7 @@ return {
       workspaces = {
         {
           name = "Zendoc",
-          path = "~/Notes/Zendoc/",
+          path = "~/Notes/Zendoc/docs/",
         },
       },
       -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
@@ -89,6 +89,28 @@ return {
         vim.fn.jobstart({ "xdg-open", url }) -- linux
         -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
         -- vim.ui.open(url) -- need Neovim 0.10.0+
+      end,
+
+
+      -- Optional, alternatively you can customize the frontmatter data.
+      ---@return table
+      note_frontmatter_func = function(note)
+        -- Add the title of the note as an alias.
+        if note.title then
+          note:add_alias(note.title)
+        end
+
+        local out = {}
+
+        -- `note.metadata` contains any manually added fields in the frontmatter.
+        -- So here we just make sure those fields are kept in the frontmatter.
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
+        end
+
+        return out
       end,
 
       -- Optional, customize how note IDs are generated given an optional title.
