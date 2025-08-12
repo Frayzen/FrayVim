@@ -31,8 +31,8 @@ return {
 
       workspaces = {
         {
-          name = "Flasodim",
-          path = "~/Flasodim",
+          name = "Zendoc",
+          path = "~/Notes/Zendoc/",
         },
       },
       -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this

@@ -8,7 +8,7 @@ return {
     init = function()
       -- General plugin settings
       vim.g.mkdp_filetypes = { "markdown" }
-      vim.g.mkdp_auto_close = 0  -- Allow multiple previews
+      vim.g.mkdp_auto_close = 0 -- Allow multiple previews
       vim.g.mkdp_theme = 'dark'
       -- vim.g.mkdp_refresh_slow = 1 -- Better performance
 
@@ -84,7 +84,7 @@ return {
   --     end
   --   })
   -- end
--- }
+  -- }
 
   -- Basic Markdown Support
   -- {
