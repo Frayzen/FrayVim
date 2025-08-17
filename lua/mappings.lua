@@ -17,15 +17,15 @@ end
 
 mappings = {
   n = {
-    { "<esc><esc>", "<cmd>noh<CR>",       desc = "Remove highlitghting" },
+    { "<esc><esc>", "<cmd>noh<CR>",    desc = "Remove highlitghting" },
     { "<Leader>f,", group = "Find" },
     { "<Leader>j,", group = "Java" },
     { "<Leader>x",  group = "Quickfix" },
-    { "<Leader>n",  "<cmd>cnext<cr>",     desc = "Next quickfix" },
-    { "<Leader>p",  "<cmd>cprevious<cr>", desc = "Previous quickfix" },
-    { "<Leader>o",  "<cmd>copen<cr>",     desc = "Open quickfix" },
-    { "<Leader>c",  "<cmd>cclose<cr>",    desc = "Close quickfix" },
-    { "<Leader>L",  "<cmd>Lazy<CR>",      desc = "Lazy" },
+    -- { "<Leader>n",  "<cmd>cnext<cr>",     desc = "Next quickfix" },
+    -- { "<Leader>p",  "<cmd>cprevious<cr>", desc = "Previous quickfix" },
+    -- { "<Leader>o",  "<cmd>copen<cr>",     desc = "Open quickfix" },
+    -- { "<Leader>c",  "<cmd>cclose<cr>",    desc = "Close quickfix" },
+    { "<Leader>L",  "<cmd>Lazy<CR>",   desc = "Lazy" },
   },
 }
 
