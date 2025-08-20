@@ -24,20 +24,35 @@ return {
     t("\\langle"), i(0)
   }),
   s({ trig = "kt", dscr = "Ket |0⟩" }, {
-    t("\\ket{"), i(1,"x"), t("}"), i(0)
+    t("\\ket{"), i(1, "x"), t("}"), i(0)
   }),
   s({ trig = "br", dscr = "Ket |0⟩" }, {
-    t("\\bra{"), i(1,"x"), t("}"), i(0)
+    t("\\bra{"), i(1, "x"), t("}"), i(0)
   }),
   s({ trig = "al", dscr = "Ket |0⟩" }, {
     t("\\alpha"), i(0)
   }),
-s({ trig = "bt", dscr = "Ket |0⟩" }, {
+  s({ trig = "bt", dscr = "Ket |0⟩" }, {
     t("\\beta"), i(0)
+  }),
+  s({ trig = "nb", dscr = "nabla" }, {
+    t("\\nabla"), i(0)
+  }),
+  s({ trig = "cd", dscr = "cdot" }, {
+    t("\\cdot"), i(0)
+  }),
+  s({ trig = "rl", dscr = "\\left[ and \\right]" }, {
+    t("\\left["), i(1, "x"), t("\\right]"), i(0)
   }),
 
 
 
+s({ trig = "where", dscr = "where vars" }, {
+    t({"> Where:  ", "> $"}), i(1, "var"), t("$ : "), i(2, "def"), t({"  "}), i(0)
+}),
+s({ trig = "we", dscr = "where entry" }, {
+    t({"> $"}), i(1, "var"), t("$ : "), i(2, "def"), t({"  "}), i(0)
+}),
 
 
   -- math
@@ -60,107 +75,124 @@ s({ trig = "bt", dscr = "Ket |0⟩" }, {
     t("\\frac{\\partial^2 "), i(1, "input"), t("}{\\partial x^2}"), i(0)
   }),
   s({ trig = "sum", dscr = "Summation with limits \\sum_{start}^{end} expression" }, {
-  t("\\sum_{"), i(1, "n=0"), t("}^{"), i(2, "\\infty"), t("} "), i(3, "x_n"), i(0)
-}),
-s({ trig = "x10", dscr = "10 ^ {x}" }, {
-  t("\\times 10 ^ {"), i(1, "x"), t("}"), i(0)
-}),
--- psi of x
-s({ trig = "psix", dscr = "Function Psi of x \\psi(x)" }, {
-  t("\\psi(x)"), i(0)
-}),
-s({ trig = "Psixt", dscr = "Function Psi of x \\Psi(x,t)" }, {
-  t("\\Psi(x,t)"), i(0)
-}),
+    t("\\sum_{"), i(1, "n=0"), t("}^{"), i(2, "\\infty"), t("} "), i(3, "x_n"), i(0)
+  }),
+  s({ trig = "x10", dscr = "10 ^ {x}" }, {
+    t("\\times 10 ^ {"), i(1, "x"), t("}"), i(0)
+  }),
+  -- psi of x
+  s({ trig = "psix", dscr = "Function Psi of x \\psi(x)" }, {
+    t("\\psi(x)"), i(0)
+  }),
+  s({ trig = "Psixt", dscr = "Function Psi of x \\Psi(x,t)" }, {
+    t("\\Psi(x,t)"), i(0)
+  }),
 
--- Generic state kets
-s({ trig = "psi", dscr = "Generic ket |ψ⟩" }, {
-  t("\\ket{\\psi}"), i(0)
-}),
-s({ trig = "01", dscr = "set of 0 and 1" }, {
-  t("\\{0,1\\}"), i(0)
-}),
-s({ trig = "01n", dscr = "set of 0 and 1" }, {
-  t("\\{0,1\\}^n"), i(0)
-}),
+  -- Generic state kets
+  s({ trig = "psi", dscr = "Generic ket |ψ⟩" }, {
+    t("\\ket{\\psi}"), i(0)
+  }),
+  s({ trig = "01", dscr = "set of 0 and 1" }, {
+    t("\\{0,1\\}"), i(0)
+  }),
+  s({ trig = "01n", dscr = "set of 0 and 1" }, {
+    t("\\{0,1\\}^n"), i(0)
+  }),
 
--- Inner products
-s({ trig = "bk", dscr = "Inner product ⟨ψ|φ⟩" }, {
-  t("\\braket{\\psi|\\phi}"), i(0)
-}),
-s({ trig = "prj", dscr = "Projector |a⟩⟨b|" }, {
-  t("\\ket{"), i(1, "a"), t("}\\bra{"), i(2, "b"), t("}"), i(0)
-}),
+  -- Inner products
+  s({ trig = "bk", dscr = "Inner product ⟨ψ|φ⟩" }, {
+    t("\\braket{\\psi|\\phi}"), i(0)
+  }),
+  s({ trig = "prj", dscr = "Projector |a⟩⟨b|" }, {
+    t("\\ket{"), i(1, "a"), t("}\\bra{"), i(2, "b"), t("}"), i(0)
+  }),
 
--- Text eV
-s({ trig = "ev", dscr = "Electron volt \\text{eV}" }, {
-  t("\\text{eV}"), i(0)
-}),
--- Text eV
-s({ trig = "txt", dscr = "Text block \\text{input}" }, {
-  t("\\text{"), i(1, "input"), t("}"), i(0)
-}),
--- Inline math exp
-s({ trig = "in", dscr = "Inline exp $ input $" }, {
-  t("$"), i(1, "input"), t("$"), i(0)
-}),
--- multi line exp
-s({ trig = "mth", dscr = "Multiline exp $$ input $$" }, {
-  t({ "$$", "" }),
-  i(1, "input"),
-  t({ "", "$$" }),
-  i(0)
-}),
+  -- Text eV
+  s({ trig = "ev", dscr = "Electron volt \\text{eV}" }, {
+    t("\\text{eV}"), i(0)
+  }),
+  -- Text eV
+  s({ trig = "txt", dscr = "Text block \\text{input}" }, {
+    t("\\text{"), i(1, "input"), t("}"), i(0)
+  }),
+  -- Inline math exp
+  s({ trig = "in", dscr = "Inline exp $ input $" }, {
+    t("$"), i(1, "input"), t("$"), i(0)
+  }),
+  -- multi line exp
+  s({ trig = "mth", dscr = "Multiline exp $$ input $$" }, {
+    t({ "$$", "" }),
+    i(1, "input"),
+    t({ "", "$$" }),
+    i(0)
+  }),
 
-s({ trig = "amth", dscr = "Multiline exp $$ input $$" }, {
-  t({ "$$", "" }),
-  t({ "\\begin{align*}", "" }),
-  i(1, "input"),
-  t({ "", "\\end{align*}" }),
-  t({ "", "$$" }),
-  i(0)
-}),
+  s({ trig = "amth", dscr = "Multiline exp $$ input $$" }, {
+    t({ "$$", "" }),
+    t({ "\\begin{align*}", "" }),
+    i(1, "input"),
+    t({ "", "\\end{align*}" }),
+    t({ "", "$$" }),
+    i(0)
+  }),
 
-s({ trig = "bmth", dscr = "Multiline exp $$ input $$" }, {
-  t({ "$$", "" }),
-  t({ "\\boxed{", "" }),
-  i(1, "input"),
-  t({ "", "}" }),
-  t({ "", "$$" }),
-  i(0)
-}),
+  s({ trig = "bmth", dscr = "Multiline exp $$ input $$" }, {
+    t({ "$$", "" }),
+    t({ "\\boxed{", "" }),
+    i(1, "input"),
+    t({ "", "}" }),
+    t({ "", "$$" }),
+    i(0)
+  }),
 
--- fractions
-s({ trig = "fr", dscr = "Fraction \\frac{}{}" }, {
-  t("\\frac{"), i(1, "numerator"), t("}{"), i(2, "denominator"), t("}"), i(0)
-}),
--- square root
-s({ trig = "sq", dscr = "Sqrt \\sqrt{input}" }, {
-  t("\\sqrt{"), i(1, "input"), t("}"), i(0)
-}),
+  -- fractions
+  s({ trig = "fr", dscr = "Fraction \\frac{}{}" }, {
+    t("\\frac{"), i(1, "numerator"), t("}{"), i(2, "denominator"), t("}"), i(0)
+  }),
+  s({ trig = "grd", dscr = "dy/dx" }, {
+    t("\\frac{\\partial "), i(1, "y"), t("}{\\partial "), i(2, "x"), t("}"), i(0)
+  }),
+s({ trig = "der", dscr = "dy/dx" }, {
+    t("\\frac{\\partial "), t("}{\\partial "), i(1, "x"), t("}("), i(2,"y"), t(")"), i(0)
+  }),
 
--- exp
-s({ trig = "exp", dscr = "Fraction \\e^{input}" }, {
-  t("e ^{"), i(1, "input"), t("}"), i(0)
-}),
+s({ trig = "fder", dscr = "dy/dx" }, {
+    t("\\frac{\\partial "),i(1, "y"), t("}{\\partial "), i(2, "x"), t("}"), i(0)
+  }),
 
--- insert inpage
-s({ trig = "fig", dscr = "Markdown image with caption" }, {
-  t("!["),
-  t("MISSING IMAGE"),
-  t("](./images/figure"),
-  i(1, "n"),
-  t(".png)  "),
-  t({ "", "*Figure " }),
-  i(2, "n"),
-  t(": "),
-  i(3, "--"),
-  t("*"),
-  i(0)
-}),
+s({ trig = "dder", dscr = "dy/dx" }, {
+    t("\\frac{d "), i(1, y), t("}{d "), i(2, "x"), t("}"), i(0)
+  }),
 
--- math cal
-s({ trig = "mc", dscr = "Mathcal symbol \\mathcal{}" }, {
-  t("\\mathcal{"), i(1, "input"), t("}"), i(0)
-}),
+
+
+  -- square root
+  s({ trig = "sq", dscr = "Sqrt \\sqrt{input}" }, {
+    t("\\sqrt{"), i(1, "input"), t("}"), i(0)
+  }),
+
+  -- exp
+  s({ trig = "exp", dscr = "Fraction \\e^{input}" }, {
+    t("e ^{"), i(1, "input"), t("}"), i(0)
+  }),
+
+  -- insert inpage
+  s({ trig = "fig", dscr = "Markdown image with caption" }, {
+    t("!["),
+    t("MISSING IMAGE"),
+    t("](./images/figure"),
+    i(1, "n"),
+    t(".png)  "),
+    t({ "", "*Figure " }),
+    i(2, "n"),
+    t(": "),
+    i(3, "--"),
+    t("*"),
+    i(0)
+  }),
+
+  -- math cal
+  s({ trig = "mc", dscr = "Mathcal symbol \\mathcal{}" }, {
+    t("\\mathcal{"), i(1, "input"), t("}"), i(0)
+  }),
 }

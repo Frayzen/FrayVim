@@ -7,11 +7,11 @@ return
     require('mdmath').setup({
       math_patterns = {
         -- Standard $$ blocks
-        { start = "\\$\\$",     stop = "\\$\\$",     priority = 1 },
+        { start = "\\$\\$",     stop = "\\$\\$",   priority = 1 },
         -- Indented $$ blocks (4+ spaces)
-        { start = "^%s*\\$\\$", stop = "\\$\\$",     priority = 2 },
+        { start = "^%s*\\$\\$", stop = "\\$\\$",   priority = 2 },
 
-        { start = "^#\\$\\$", stop = "^#\\$\\$", priority = 1 },
+        { start = "^#\\$\\$",   stop = "^#\\$\\$", priority = 1 },
       },
       server_path = 'node',
       server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
@@ -23,6 +23,7 @@ return
       dynamic = true,
       dynamic_scale = 0.8,  -- Disable dynamic scaling
       internal_scale = 1.5, -- Double resolution for crisper text
+
       css = [[
           .math-render {
             min-width: 100% !important;
@@ -60,5 +61,6 @@ return
       detach = true,
       on_exit = function() end
     })
-  end
+  end,
+
 }
