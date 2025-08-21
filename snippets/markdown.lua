@@ -121,9 +121,9 @@ s({ trig = "we", dscr = "where entry" }, {
   }),
   -- multi line exp
   s({ trig = "mth", dscr = "Multiline exp $$ input $$" }, {
-    t({ "$$", "" }),
+    t({ "$$"}),
     i(1, "input"),
-    t({ "", "$$" }),
+    t({"$$" }),
     i(0)
   }),
 

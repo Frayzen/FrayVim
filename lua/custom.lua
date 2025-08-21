@@ -3,7 +3,7 @@ vim.keymap.set("n", "qq", "[{", { desc = "Go to start of function" })
 vim.keymap.set("n", "zz", "]}", { desc = "Go to end of function" })
 
 vim.keymap.set("v", "c", function()
-  local start_line = vim.fn.line("v")      -- start of visual selection (marked by 'v')
+  local start_line = vim.fn.line("v") -- start of visual selection (marked by 'v')
   local end_line = tonumber(vim.fn.input("📋 Copy lines to: "))
 
   if not end_line or end_line < 1 or end_line > vim.fn.line("$") then
@@ -78,8 +78,8 @@ local function delete_current_function()
   end
 
   -- Traverse up until you find a function-like node
-  while node and node:type() ~= "function" 
-    and node:type() ~= "function_definition" 
+  while node and node:type() ~= "function"
+    and node:type() ~= "function_definition"
     and node:type() ~= "method_definition" do
     node = node:parent()
   end
@@ -144,7 +144,9 @@ local function ipynb_to_py(bufnr)
 
   -- open the converted and formatted .py file
   vim.schedule(function()
-    vim.cmd("edit " .. py_name)
+    vim.cmd("setlocal noswapfile")
+
+    vim.cmd("edit! " .. py_name)
   end)
 end
 
@@ -188,7 +190,7 @@ vim.api.nvim_create_user_command("PatchMdmath", function()
 
   -- Save the original render function
   local original_render = mdmath.render
-  local original_get_lines = vim.api.nvim_buf_get_lines
+  local original_get_lines = vim.api.nvim_buf_get_lines()
 
   mdmath.render = function(bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
@@ -218,3 +220,67 @@ end, {})
 
 
 
+-- replace with icons
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ns = vim.api.nvim_create_namespace("python_icons")
+
+    -- detach first if already attached
+    if vim.b[bufnr].python_icons_attached then return end
+    vim.b[bufnr].python_icons_attached = true
+
+    -- helper: decorate a single line
+    local function decorate_line(lnum, line)
+      vim.api.nvim_buf_clear_namespace(bufnr, ns, lnum, lnum + 1)
+      local patterns = {
+        { pattern = "^%s*# %%%% ?%[markdown]", virt_text = " MARKDOWN            " },
+        { pattern = "^%s*# %%%%",              virt_text = " CODE" },
+      }
+      for _, p in ipairs(patterns) do
+        local s = line:find(p.pattern)
+        if s then
+          vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+            virt_text = { { p.virt_text, "Comment" } },
+            virt_text_pos = "overlay",
+            hl_mode = "replace",
+          })
+          break
+        end
+      end
+    end
+
+    -- attach to buffer updates
+    vim.api.nvim_buf_attach(bufnr, false, {
+      on_lines = function(_, buf, _, first, last, new_last, _, _)
+        -- process changed lines
+        for lnum = first, new_last - 1 do
+          local line = vim.api.nvim_buf_get_lines(buf, lnum, lnum + 1, false)[1]
+          if line then
+            decorate_line(lnum, line)
+          end
+        end
+      end,
+      on_detach = function()
+        vim.b[bufnr].python_icons_attached = false
+      end,
+    })
+
+    -- initial pass
+    for lnum, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
+      decorate_line(lnum - 1, line)
+    end
+  end,
+})
+
+-- format md
+vim.api.nvim_create_user_command("Fmt", function()
+  -- Save current file
+  vim.cmd("write")
+  -- Run your formatting script on current file
+  local filepath = vim.fn.expand("%:p")
+  vim.cmd("silent !python3 ~/scripts/format.py " .. filepath)
+  -- Reload the file
+  vim.cmd("edit")
+end, {})

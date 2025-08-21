@@ -27,6 +27,13 @@ return {
         end,
         desc = "solve latex visual selection",
       },
+    {
+        "<leader>bd",
+        function()
+          require("latex-eval").diff_visual()
+        end,
+        desc = "differenitae latex visual selection",
+      }
 
     })
   end,

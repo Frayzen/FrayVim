@@ -22,42 +22,23 @@ return {
         python = {
           enabled = true,
           query = [[
-  ((expression_statement
-     (string
-       (string_content) @injection.content))
-   (#set! injection.language "markdown"))
-]]
+          ((expression_statement
+          (string
+          (string_content) @injection.content))
+          (#set! injection.language "markdown"))
+          ]]
 
         },
         gitcommit = {
           enabled = true,
           query = [[
-      ((message) @injection.content
-        (#set! injection.combined)
-        (#set! injection.include-children)
-        (#set! injection.language "markdown"))
-    ]],
+          ((message) @injection.content
+          (#set! injection.combined)
+          (#set! injection.include-children)
+          (#set! injection.language "markdown"))
+          ]],
         },
       },
-
-      -- injections    = {
-      --   python = {
-      --     enabled = true,
-      --     query = [[
-      -- ((string) @injection.content
-      --   (#set! injection.language "markdown"))
-      -- ]],
-      --   },
-      --   gitcommit = {
-      --     enabled = true,
-      --     query = [[
-      --       ((message) @injection.content
-      --         (#set! injection.combined)
-      --         (#set! injection.include-children)
-      --         (#set! injection.language "markdown"))
-      --     ]],
-      --   },
-      -- },
       patterns      = {
         markdown = {
           disable = false,
