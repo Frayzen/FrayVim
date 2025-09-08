@@ -222,12 +222,29 @@ end, {})
 
 
 -- format md
-vim.api.nvim_create_user_command("Fmt", function()
+local function format_md()
   -- Save current file
   vim.cmd("write")
   -- Run your formatting script on current file
   local filepath = vim.fn.expand("%:p")
   vim.cmd("silent !python3 ~/scripts/format.py " .. filepath)
-  -- Reload the file
+  -- Reload the file to pick up changes
   vim.cmd("edit")
-end, {})
+end
+
+-- Run after writing any *.md file
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.md",
+  callback = format_md,
+})
+
+
+-- 80th char vert split
+vim.api.nvim_create_autocmd("WinNew", {
+  pattern = "*",
+  callback = function()
+    if vim.fn.winnr('$') > 1 then
+      vim.cmd("vert resize 85")
+    end
+  end,
+})
