@@ -109,6 +109,7 @@ vim.api.nvim_create_autocmd("FileType", {
       syntax match PyMarkdownQuotes /^\s*r\?"""\s*$/ conceal
       setlocal conceallevel=2
     ]])
+
   end,
 })
 

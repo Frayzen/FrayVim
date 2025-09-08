@@ -35,3 +35,5 @@ if vim.g.vscode then
   return
 end
 
+vim.cmd([[autocmd BufRead,BufNewFile *.str set filetype=javascript]])
+

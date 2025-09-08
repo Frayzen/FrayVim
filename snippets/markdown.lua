@@ -2,9 +2,13 @@ return {
   s({ trig = "iff", dscr = "iff" }, {
     t("\\Leftrightarrow"), i(0)
   }),
+s({ trig = "ot", dscr = "Tensor Product \\otimes" }, {
+    t("\\otimes"), i(0)
+  }),
   s({ trig = "imp", dscr = "implies" }, {
     t("\\Rightarrow"), i(0)
   }),
+
   s({ trig = "k0", dscr = "Ket |0⟩" }, {
     t("\\ket{0}"), i(0)
   }),
@@ -102,6 +106,9 @@ s({ trig = "we", dscr = "where entry" }, {
   -- Inner products
   s({ trig = "bk", dscr = "Inner product ⟨ψ|φ⟩" }, {
     t("\\braket{\\psi|\\phi}"), i(0)
+  }),
+  s({ trig = "prb", dscr = "Measurement Probability |⟨ψ|φ⟩|^2" }, {
+    t("|\\braket{"), i(1,"\\psi"),t("|"), i(2,"\\phi"), t('}|^2'), i(0)
   }),
   s({ trig = "prj", dscr = "Projector |a⟩⟨b|" }, {
     t("\\ket{"), i(1, "a"), t("}\\bra{"), i(2, "b"), t("}"), i(0)

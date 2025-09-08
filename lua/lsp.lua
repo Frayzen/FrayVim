@@ -105,6 +105,7 @@ local lsp_params = {
   emmet_ls = {
     filetypes = { "twig", "html", "templ", "javascriptreact" },
   },
+  ts_ls = {},
   cssls = {},
   dartls = {},
   cmake = {},
