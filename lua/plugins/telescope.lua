@@ -4,7 +4,7 @@ return {
   -- or                              , branch = '0.1.x',
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
-    { "<leader>ff", "<cmd>Telescope find_files<CR>",                            desc = "Find files" },
+    -- { "<leader>ff", "<cmd>Telescope find_files<CR>",                            desc = "Find files" },
     { "<leader>fq", "<cmd>Telescope quickfix<CR>",                              desc = "Find quickfix" },
     { "<leader>fc", "<cmd>Telescope grep_string search=<<<<<<CR>",              desc = "Find merge conflict" },
     { "<leader>ft", "<cmd>Telescope grep_string search=TODO<CR>",               desc = "Find TODOs" },

@@ -18,7 +18,13 @@ return {
           },
 
           python = {
-            command = {"ipython", "--no-autoindent"},
+            command = { "ipython", "--no-autoindent" },
+            -- command = { "python", "manage.py", "shell" },
+            format = require("iron.fts.common").bracketed_paste,
+            block_dividers = { "# %%", "#%%" },
+          },
+          django = {
+            command = { "python", "manage.py", "shell" },
             format = require("iron.fts.common").bracketed_paste,
             block_dividers = { "# %%", "#%%" },
           },

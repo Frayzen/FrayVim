@@ -240,11 +240,37 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 
 -- 80th char vert split
-vim.api.nvim_create_autocmd("WinNew", {
-  pattern = "*",
-  callback = function()
-    if vim.fn.winnr('$') > 1 then
-      vim.cmd("vert resize 85")
+-- vim.api.nvim_create_autocmd("WinNew", {
+--   pattern = "*",
+--   callback = function()
+--     local buftype = vim.bo.buftype
+--     local filetype = vim.bo.filetype
+
+--     -- only resize for normal code buffers
+--     if buftype == "" and not vim.tbl_contains({ "help", "fff", "toggleterm", "qf" }, filetype) then
+--       if vim.fn.winnr('$') > 1 then
+--         vim.cmd("vert resize 85")
+--       end
+--     end
+--   end,
+-- })
+
+
+-- supresss md math errors
+-- Suppress mdmath errors
+local ok, mdmath = pcall(require, "mdmath")
+if ok then
+  local tracker = require("mdmath.tracker")
+
+  -- wrap tracker.add in a protected call
+  local orig_add = tracker.add
+  tracker.add = function(...)
+    local ok2, result = pcall(orig_add, ...)
+    if not ok2 then
+      -- silently ignore errors
+      return nil
     end
-  end,
-})
+    return result
+  end
+end
+
