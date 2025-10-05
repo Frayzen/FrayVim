@@ -115,27 +115,25 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- nb sync
--- ~/config/nvim/nb_sync.lua
 
+-- Function to convert .ipynb → .py
 local function ipynb_to_py(bufnr)
   local name = vim.api.nvim_buf_get_name(bufnr)
   if not name:match("%.ipynb$") then return end
 
   local py_name = name:gsub("%.ipynb$", ".py")
-  local script_path = vim.fn.expand("~/scripts/nb_sync.py") -- expand ~ properly
+  local script_path = vim.fn.expand("~/scripts/nb_sync.py")
   local format_path = vim.fn.expand("~/scripts/format.py")
 
-  -- run your conversion script
+  -- Run conversion script
   local cmd = { "python3", script_path, "to-py", name, py_name }
   local result = vim.fn.system(cmd)
-
-  -- check for errors
   if vim.v.shell_error ~= 0 then
     vim.notify("nb_sync.py failed: " .. result, vim.log.levels.ERROR)
     return
   end
 
-  -- run the formatter on the newly generated .py
+  -- Run formatter on the new .py
   local format_cmd = { "python3", format_path, py_name }
   local format_result = vim.fn.system(format_cmd)
   if vim.v.shell_error ~= 0 then
@@ -143,14 +141,14 @@ local function ipynb_to_py(bufnr)
     return
   end
 
-  -- open the converted and formatted .py file
+  -- Open the converted file
   vim.schedule(function()
     vim.cmd("setlocal noswapfile")
-
     vim.cmd("edit! " .. py_name)
   end)
 end
 
+-- Function to convert .py → .ipynb (manual command)
 local function py_to_ipynb(bufnr)
   local name = vim.api.nvim_buf_get_name(bufnr)
   if not name:match("%.py$") then return end
@@ -162,22 +160,26 @@ local function py_to_ipynb(bufnr)
     local result = vim.fn.system(cmd)
     if vim.v.shell_error ~= 0 then
       vim.notify("nb_sync.py failed: " .. result, vim.log.levels.ERROR)
+    else
+      vim.notify("Notebook synced: " .. ipynb_name, vim.log.levels.INFO)
     end
+  else
+    vim.notify("No corresponding .ipynb file found", vim.log.levels.WARN)
   end
 end
 
-
--- Open .ipynb: convert to .py and switch buffer
+-- Automatically convert when opening a .ipynb file
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*.ipynb",
   callback = function(args) ipynb_to_py(args.buf) end
 })
 
--- Save .py: update the corresponding .ipynb
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.py",
-  callback = function(args) py_to_ipynb(args.buf) end
-})
+-- Define a manual command for syncing .py → .ipynb
+vim.api.nvim_create_user_command("Nbsync", function()
+  py_to_ipynb(vim.api.nvim_get_current_buf())
+end, { desc = "Sync current Python file back to its corresponding .ipynb" })
+
+
 
 -- Patch py.nb
 
@@ -232,17 +234,13 @@ local function format_md()
   vim.cmd("edit")
 end
 
--- Run after writing any *.md file
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.md",
-  callback = format_md,
+-- help with reolad buffer wiring md py
+-- Automatically reload files changed outside Neovim before saving
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  command = "silent! checktime",
 })
 
--- Autocmd for python
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.py",
-  callback = format_md,
-})
 -- 80th char vert split
 -- vim.api.nvim_create_autocmd("WinNew", {
 --   pattern = "*",

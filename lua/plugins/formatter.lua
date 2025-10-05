@@ -17,30 +17,45 @@
 -- }
 
 return {
-    "mhartington/formatter.nvim",
-    config = function()
-        require("formatter").setup({
-            filetype = {
-                python = {
-                    function()
-                        return {
-                            exe = "black",
-                            args = { "--line-length", "79", "-" },
-                            stdin = true,
-                        }
-                    end,
-                    -- You can also enable isort here if desired:
-                    -- require("formatter.filetypes.python").isort,
-                },
-            },
-        })
+  "mhartington/formatter.nvim",
+  config = function()
+    require("formatter").setup({
+      filetype = {
+        python = {
+          -- 1️⃣ Run your custom format.py
+          function()
+            local filepath = vim.fn.expand("%:p")
+            local cmd = "python3 ~/scripts/format.py " .. vim.fn.shellescape(filepath)
+            vim.fn.system(cmd)
+            return nil
+          end,
 
-        -- Keybinding for formatting
-        vim.api.nvim_set_keymap(
-            "n",
-            "<leader>f",
-            ":silent! Format<CR>",
-            { noremap = true, silent = true }
-        )
-    end,
+          -- 2️⃣ Run Black
+          function()
+            return {
+              exe = "black",
+              args = { "--line-length", "79", "--quiet", "-" },
+              stdin = true,
+            }
+          end,
+
+          -- 3️⃣ Reload file safely *after* formatting
+          function()
+            vim.defer_fn(function()
+              vim.cmd("silent! checktime")
+            end, 200)
+            return nil
+          end,
+        },
+      },
+    })
+
+    -- Keybinding for formatting
+    vim.api.nvim_set_keymap(
+      "n",
+      "<leader>f",
+      ":silent! Format<CR>",
+      { noremap = true, silent = true }
+    )
+  end,
 }
