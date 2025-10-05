@@ -1,21 +1,3 @@
--- return {
---     "mhartington/formatter.nvim",
---     config = function()
---         local types = "formatter.filetypes."
---         require("formatter").setup({
---             filetype = {
---                 python = {
---                     require(types .. "python").black,
---                     -- require(types .. "python").isort,
---                 },
---             },
---         })
-
---         -- Keybinding for formatting
---         vim.api.nvim_set_keymap("n", "<leader>f", ":silent! Format<CR>", { noremap = true, silent = true })
---     end,
--- }
-
 return {
   "mhartington/formatter.nvim",
   config = function()
@@ -24,6 +6,7 @@ return {
         python = {
           -- 1️⃣ Run your custom format.py
           function()
+            vim.cmd("write")
             local filepath = vim.fn.expand("%:p")
             local cmd = "python3 ~/scripts/format.py " .. vim.fn.shellescape(filepath)
             vim.fn.system(cmd)
@@ -47,6 +30,25 @@ return {
             return nil
           end,
         },
+        markdown = {
+          -- 1️⃣ Run your custom format.py
+          function()
+            vim.cmd("write")
+            local filepath = vim.fn.expand("%:p")
+            local cmd = "python3 ~/scripts/format.py " .. vim.fn.shellescape(filepath)
+            vim.fn.system(cmd)
+            return nil
+          end,
+
+          function()
+            vim.defer_fn(function()
+              vim.cmd("silent! checktime")
+            end, 200)
+            return nil
+          end,
+
+
+        }
       },
     })
 
