@@ -238,7 +238,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = format_md,
 })
 
-
+-- Autocmd for python
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.py",
+  callback = format_md,
+})
 -- 80th char vert split
 -- vim.api.nvim_create_autocmd("WinNew", {
 --   pattern = "*",

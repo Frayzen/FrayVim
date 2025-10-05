@@ -3,8 +3,27 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
+
+    bigfile = { enabled = true },
     image = {
       enabled = true,
+      formats = {
+        "png",
+        "jpg",
+        "jpeg",
+        "gif",
+        "bmp",
+        "webp",
+        "tiff",
+        "heic",
+        "avif",
+        "mp4",
+        "mov",
+        "avi",
+        "mkv",
+        "webm",
+        "pdf",
+      },
       integrations = {
         markdown = {
           enabled = true, -- show images inline in Markdown buffers
@@ -22,4 +41,3 @@ return {
     end, { desc = "Toggle inline images" })
   end,
 }
-
