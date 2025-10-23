@@ -1,72 +1,53 @@
--- File: lua/qcircuit.lua
+-- file: lua/quantum_circuit.lua
 local M = {}
+-- file: lua/quantum_circuit.lua
 
--- Directory to save PNGs
-local output_dir = vim.fn.expand("~/Documents/qcircuits/")
+M.save_circuit_png = function()
+    local start_line = vim.fn.line("'<")
+    local end_line = vim.fn.line("'>")
+    local lines = vim.fn.getline(start_line, end_line)
+    local circuit_code = table.concat(lines, "\n")
 
--- Make sure the dir exists
-os.execute("mkdir -p " .. output_dir)
-
--- Function to generate a PNG from LaTeX qcircuit code
-local function qcircuit_to_png(circuit_code, filename)
-  local tex_file = output_dir .. "temp.tex"
-  local dvi_file = output_dir .. "temp.dvi"
-  local png_file = output_dir .. filename
-
-  -- Wrap circuit in standalone document
-  local latex_code = [[
+    -- wrap in standalone LaTeX document
+    local tex_content = [[
 \documentclass[border=2mm]{standalone}
 \usepackage{qcircuit}
 \begin{document}
 ]] .. circuit_code .. [[
 \end{document}
-]]
+    ]]
 
-  -- Write LaTeX file
-  local f = io.open(tex_file, "w")
-  f:write(latex_code)
-  f:close()
+    -- prompt for filename
+    local filename = vim.fn.input("Save circuit as: ", "circuit")  -- default 'circuit'
+    if filename == "" then
+        print("Cancelled")
+        return
+    end
 
-  -- Compile and convert to PNG
-  os.execute("latex -interaction=nonstopmode -output-directory=" .. output_dir .. " " .. tex_file)
-  os.execute("dvipng -T tight -o " .. png_file .. " " .. dvi_file)
+    -- generate file paths
+    local tmp_dir = vim.fn.expand("~/.cache/nvim/circuits/")
+    os.execute("mkdir -p " .. tmp_dir)
+    local tex_file = tmp_dir .. filename .. ".tex"
+    local pdf_file = tmp_dir .. filename .. ".pdf"
+    local png_file = tmp_dir .. filename .. ".png"
 
-  -- Clean up temp files
-  for _, ext in ipairs({ ".aux", ".log", ".tex", ".dvi" }) do
-    os.remove(output_dir .. "temp" .. ext)
-  end
+    -- save .tex
+    local f = io.open(tex_file, "w")
+    f:write(tex_content)
+    f:close()
 
-  return png_file
+    -- compile pdflatex
+    os.execute(string.format("pdflatex -interaction=nonstopmode -output-directory=%s %s > /dev/null", tmp_dir, tex_file))
+    -- convert PDF to high-res PNG
+    os.execute(string.format("convert -density 300 %s -quality 100 %s", pdf_file, png_file))
+
+    -- copy markdown figure snippet to system clipboard
+    local md_snippet = string.format("![Quantum Circuit](%s)", png_file)
+    vim.fn.setreg("+", md_snippet)
+
+    print("Saved PNG:", png_file)
+    print("Markdown copied to clipboard!")
 end
-
--- Main command function
-function M.save_selected_qcircuit()
-  -- Get visual selection
-  vim.cmd("normal! `<v`>y")
-  local circuit_code = vim.fn.getreg('"')
-
-  -- Ask for a filename
-  local filename = vim.fn.input("PNG filename (with .png): ")
-
-  if filename == "" then
-    print("No filename given, aborting")
-    return
-  end
-
-  local png_path = qcircuit_to_png(circuit_code, filename)
-
-  -- Insert Markdown figure snippet
-  local md_snippet = string.format("![Quantum Circuit](%s)", png_path)
-  vim.api.nvim_put({ md_snippet }, "l", true, true)
-
-  print("Saved PNG and inserted Markdown snippet: " .. png_path)
-end
-
--- Optional: setup command
-vim.api.nvim_create_user_command(
-  "SaveQcircuit",
-  M.save_selected_qcircuit,
-  { range = true }
-)
 
 return M
+

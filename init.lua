@@ -28,9 +28,15 @@ require("lsp")
 
 require("custom")
 require("replace")
-require("qciruit")
+local qc = require("qciruit")
 
-
+-- Map a key to run it on selected text
+vim.api.nvim_set_keymap(
+  "v",
+  "<leader>qc",
+  ":lua require('qciruit').save_circuit_png()<CR>",
+  { noremap = true, silent = true }
+)
 if vim.g.vscode then
   vim.o.cmdheight = 1
   return
