@@ -71,7 +71,7 @@ return {
         exit = "<space>sq",
         clear = "<space>cl",
         toggle_repl = "<space>ti",
-        restart_repl = "<space>rR",
+        restart_repl = "<space>rr",
       }
     }
 
@@ -79,6 +79,5 @@ return {
     vim.keymap.set('n', '<space>rf', '<cmd>IronFocus<cr>')
     vim.keymap.set('n', '<space>rh', '<cmd>IronHide<cr>')
     vim.keymap.set('n', '<space>rl', '<cmd>IronRepl<cr>')
-    -- vim.keymap.set("n", "<leader>ii", ToggleIronSplit, { desc = "Toggle Iron Split" })
   end
 }

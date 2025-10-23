@@ -28,6 +28,7 @@ require("lsp")
 
 require("custom")
 require("replace")
+require("qciruit")
 
 
 if vim.g.vscode then

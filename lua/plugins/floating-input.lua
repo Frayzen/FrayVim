@@ -78,4 +78,3 @@ return {
     -- No additional configuration needed
   end
 }
-

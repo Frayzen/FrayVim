@@ -2,7 +2,7 @@ return {
   s({ trig = "iff", dscr = "iff" }, {
     t("\\Leftrightarrow"), i(0)
   }),
-s({ trig = "ot", dscr = "Tensor Product \\otimes" }, {
+  s({ trig = "ot", dscr = "Tensor Product \\otimes" }, {
     t("\\otimes"), i(0)
   }),
   s({ trig = "imp", dscr = "implies" }, {
@@ -51,12 +51,12 @@ s({ trig = "ot", dscr = "Tensor Product \\otimes" }, {
 
 
 
-s({ trig = "where", dscr = "where vars" }, {
-    t({"> Where:  ", "> $"}), i(1, "var"), t("$ : "), i(2, "def"), t({"  "}), i(0)
-}),
-s({ trig = "we", dscr = "where entry" }, {
-    t({"> $"}), i(1, "var"), t("$ : "), i(2, "def"), t({"  "}), i(0)
-}),
+  s({ trig = "where", dscr = "where vars" }, {
+    t({ "> Where:  ", "> $" }), i(1, "var"), t("$ : "), i(2, "def"), t({ "  " }), i(0)
+  }),
+  s({ trig = "we", dscr = "where entry" }, {
+    t({ "> $" }), i(1, "var"), t("$ : "), i(2, "def"), t({ "  " }), i(0)
+  }),
 
 
   -- math
@@ -108,7 +108,7 @@ s({ trig = "we", dscr = "where entry" }, {
     t("\\braket{\\psi|\\phi}"), i(0)
   }),
   s({ trig = "prb", dscr = "Measurement Probability |⟨ψ|φ⟩|^2" }, {
-    t("|\\braket{"), i(1,"\\psi"),t("|"), i(2,"\\phi"), t('}|^2'), i(0)
+    t("|\\braket{"), i(1, "\\psi"), t("|"), i(2, "\\phi"), t('}|^2'), i(0)
   }),
   s({ trig = "prj", dscr = "Projector |a⟩⟨b|" }, {
     t("\\ket{"), i(1, "a"), t("}\\bra{"), i(2, "b"), t("}"), i(0)
@@ -128,9 +128,9 @@ s({ trig = "we", dscr = "where entry" }, {
   }),
   -- multi line exp
   s({ trig = "mth", dscr = "Multiline exp $$ input $$" }, {
-    t({ "$$"}),
+    t({ "$$" , "" }),
     i(1, "input"),
-    t({"$$" }),
+    t({ "", "$$" }),
     i(0)
   }),
 
@@ -159,15 +159,15 @@ s({ trig = "we", dscr = "where entry" }, {
   s({ trig = "grd", dscr = "dy/dx" }, {
     t("\\frac{\\partial "), i(1, "y"), t("}{\\partial "), i(2, "x"), t("}"), i(0)
   }),
-s({ trig = "der", dscr = "dy/dx" }, {
-    t("\\frac{\\partial "), t("}{\\partial "), i(1, "x"), t("}("), i(2,"y"), t(")"), i(0)
+  s({ trig = "der", dscr = "dy/dx" }, {
+    t("\\frac{\\partial "), t("}{\\partial "), i(1, "x"), t("}("), i(2, "y"), t(")"), i(0)
   }),
 
-s({ trig = "fder", dscr = "dy/dx" }, {
-    t("\\frac{\\partial "),i(1, "y"), t("}{\\partial "), i(2, "x"), t("}"), i(0)
+  s({ trig = "fder", dscr = "dy/dx" }, {
+    t("\\frac{\\partial "), i(1, "y"), t("}{\\partial "), i(2, "x"), t("}"), i(0)
   }),
 
-s({ trig = "dder", dscr = "dy/dx" }, {
+  s({ trig = "dder", dscr = "dy/dx" }, {
     t("\\frac{d "), i(1, y), t("}{d "), i(2, "x"), t("}"), i(0)
   }),
 

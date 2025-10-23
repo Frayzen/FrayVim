@@ -29,6 +29,28 @@ end, { desc = "Copy visual selection to line number" })
 
 local ts_utils = require('nvim-treesitter.ts_utils')
 
+local function copy_current_file()
+  -- Get total number of lines in the current buffer
+  local line_count = vim.api.nvim_buf_line_count(0)
+
+  -- Get all lines
+  local lines = vim.api.nvim_buf_get_lines(0, 0, line_count, false)
+
+  -- Join into one string
+  local text = table.concat(lines, "\n")
+
+  -- Copy to system clipboard (+ register)
+  vim.fn.setreg("+", text)
+
+  -- Optional: also copy to unnamed register for convenience
+  vim.fn.setreg('"', text)
+
+  -- Notify user
+  vim.notify("Copied entire file (" .. line_count .. " lines) to clipboard", vim.log.levels.INFO)
+end
+
+vim.keymap.set('n', '<leader>cb', copy_current_file, { desc = "Copy current file to clipboard" })
+
 local function copy_current_function()
   local node = ts_utils.get_node_at_cursor()
   if not node then
@@ -275,4 +297,34 @@ if ok then
     return result
   end
 end
+
+-- iron
+-- In your init.lua or a Lua config file for Iron.nvim
+
+-- Make sure iron is required
+local iron = require("iron.core")
+
+-- Define a function to prompt for input and send to REPL
+local function send_input_to_repl()
+  vim.ui.input({ prompt = "Send to REPL: " }, function(input)
+    if input and input ~= "" then
+      iron.send(nil, input)
+    end
+  end)
+end
+
+-- Key mapping: <leader>rs will trigger the prompt
+vim.keymap.set("n", "<leader>rs", send_input_to_repl, { noremap = true, silent = true })
+
+-- Use a dedicated swap directory
+vim.opt.directory = vim.fn.stdpath('data') .. '/swap//'
+
+-- Disable swap for embedded or floating instances
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    if vim.fn.exists('$NVIM_LISTEN_ADDRESS') == 1 then
+      vim.opt.swapfile = false
+    end
+  end
+})
 
