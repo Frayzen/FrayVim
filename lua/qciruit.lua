@@ -53,6 +53,27 @@ M.save_circuit_png = function()
     print("Saved PNG:", png_file)
     print("Markdown copied to clipboard!")
 end
+function M.fold_circuit()
+    local start_line = vim.fn.search("\\[", "bn")  -- search backward
+    local end_line = vim.fn.search("\\]", "n")     -- search forward
+    if start_line > 0 and end_line > 0 then
+        vim.cmd(start_line .. "," .. end_line .. "fold")
+        print("Folded circuit: lines " .. start_line .. "-" .. end_line)
+    else
+        print("No circuit block found nearby!")
+    end
+end
 
+-- Unfold the nearest \[ ... \] block
+function M.unfold_circuit()
+    local start_line = vim.fn.search("\\[", "bn")
+    local end_line = vim.fn.search("\\]", "n")
+    if start_line > 0 and end_line > 0 then
+        vim.cmd(start_line .. "," .. end_line .. "foldopen")
+        print("Unfolded circuit: lines " .. start_line .. "-" .. end_line)
+    else
+        print("No circuit block found nearby!")
+    end
+end
 return M
 

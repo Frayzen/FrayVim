@@ -28,7 +28,19 @@ require("lsp")
 
 require("custom")
 require("replace")
+
+
+
+-- diagams
 local qc = require("qciruit")
+-- Load the module
+
+-- Keybindings (normal mode)
+vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("qciruit").fold_circuit()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fu', ':lua require("qciruit").unfold_circuit()<CR>', { noremap = true, silent = true })
+
+-- Optional: toggle fold (fold if open, unfold if closed)
+vim.api.nvim_set_keymap('n', '<leader>ft', ':lua vim.cmd("normal! za")<CR>', { noremap = true, silent = true })
 
 -- Map a key to run it on selected text
 vim.api.nvim_set_keymap(
@@ -37,6 +49,12 @@ vim.api.nvim_set_keymap(
   ":lua require('qciruit').save_circuit_png()<CR>",
   { noremap = true, silent = true }
 )
+-- diagams
+--
+--
+--
+--
+--
 if vim.g.vscode then
   vim.o.cmdheight = 1
   return
