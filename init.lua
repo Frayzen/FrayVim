@@ -36,12 +36,10 @@ local qc = require("qciruit")
 -- Load the module
 
 -- Keybindings (normal mode)
-vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("qciruit").fold_circuit()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fu', ':lua require("qciruit").unfold_circuit()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("qciruit").fold_circuit()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>fu', ':lua require("qciruit").unfold_circuit()<CR>', { noremap = true, silent = true })
 
--- Optional: toggle fold (fold if open, unfold if closed)
-vim.api.nvim_set_keymap('n', '<leader>ft', ':lua vim.cmd("normal! za")<CR>', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("qciruit").toggle_circuits()<CR>', { noremap = true, silent = true })
 -- Map a key to run it on selected text
 vim.api.nvim_set_keymap(
   "v",

@@ -1,23 +1,28 @@
--- return {
--- 	"navarasu/onedark.nvim",
--- 	config = function()
--- 		-- Lua
--- 		require("onedark").setup({
--- 			style = "warmer",
--- 		})
--- 		require("onedark").load()
--- 	end,
--- }
+return {
+	"navarasu/onedark.nvim",
+	config = function()
+		-- Lua
+		require("onedark").setup({
+			style = "warmer",
+		})
+		require("onedark").load()
+	end,
+}
 -- return {
 --     "rebelot/kanagawa.nvim",
 --     config = function()
 --         require("kanagawa").load("wave")
 --     end,
 -- }
-return 
-{ "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000,
-config= function()
-  vim.cmd([[colorscheme moonfly]])
-end,
-}
 
+-- return {
+--   "folke/tokyonight.nvim",
+--   lazy = false,
+--   style = "night",
+--   priority = 1000,
+--   transparent = true,
+--   styles = {
+--     sidebars = "transparent",
+--     floats = "transparent",
+--   }
+-- }
