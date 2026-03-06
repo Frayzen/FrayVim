@@ -1,5 +1,15 @@
 local lsp_params = {
+
   clangd = {
+    cmd = {
+      "clangd",
+      "--compile-commands-dir=build",
+
+    "--query-driver=/usr/bin/g++-14",
+    },
+    root_dir = require("lspconfig.util").root_pattern(
+      "CMakeLists.txt"
+    ),
     on_attach = function()
       register_mapping({
         n = {
@@ -7,7 +17,8 @@ local lsp_params = {
         },
       })
     end,
-  },
+  }
+  ,
   lua_ls = {},
   asm_lsp = {},
   rust_analyzer = {
@@ -65,13 +76,6 @@ local lsp_params = {
       },
     },
     -- Explicit Python path (same as Pyright)
-    settings = {
-      python = {
-        -- pythonPath = "/home/tim/.conda/envs/torch-env/bin/python",
-        -- pythonPath = "/home/tim/.conda/envs/tf218/bin/python",
-      }
-    },
-    -- Optional: Markdown formatting for hover docs
     on_attach = function(client, bufnr)
       client.server_capabilities.hoverProvider = true
       client.server_capabilities.documentFormattingProvider = false -- Jedi doesn't format
@@ -109,6 +113,13 @@ local lsp_params = {
   cssls = {},
   dartls = {},
   cmake = {},
+  coq_lsp = {
+    cmd = { "/home/tim/.opam/coq-env/bin/coq-lsp" },
+    filetypes = { "coq" },
+    root_dir = require("lspconfig").util.root_pattern("_CoqProject", "dune-project", ".git"),
+    single_file_support = true,
+    capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  },
   marksman = {
     filetypes = { "markdown" },
     settings = {
@@ -117,7 +128,7 @@ local lsp_params = {
       markdown = {
         enable = true,
         trace = {
-          server = "verbose"   -- Optional: for debugging
+          server = "verbose" -- Optional: for debugging
         }
       }
     }

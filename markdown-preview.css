@@ -1,38 +1,79 @@
 /* ----------------- */
+/* Base body */
 body {
   font-family: "CMU Serif", "Georgia", serif;
-  background-color: #0f111a;
-  color: #e0e6f0;
+  background-color: #fdf6e3; /* very light cream */
+  color: #333333; /* dark text for readability */
   padding: 2em;
   max-width: 900px;
   margin: auto;
   line-height: 1.7;
 }
 
-h1, h2, h3 {
-  color: #2c7824;
-  border-bottom: 1px solid #282c34;
+/* Headings */
+h1, h2, h3, h4 {
+  color: #d33682; /* pink-magenta heading */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.2em;
 }
 
+/* Links */
 a {
-  color: #80cbc4;
+  color: #268bd2; /* blue */
+  text-decoration: underline;
 }
 
-code, pre {
-  background: #1c1f2b;
-  color: #c3e88d;
-  padding: 0.3em 0.5em;
+/* Code blocks and inline code */
+pre, code {
+  background-color: #eee8d5; /* light, slightly darker than body */
+  color: #657b83; /* soft dark gray text */
+  padding: 0.5em;
+  border-radius: 5px;
+  font-family: "Fira Code", monospace;
+  overflow-x: auto;
+}
+
+/* Inline code in text */
+p code, li code, span.code {
+  background-color: #eee8d5;
+  color: #586e75;
+  padding: 0.2em 0.4em;
   border-radius: 4px;
-  font-family: "JetBrains Mono", monospace;
 }
 
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #2aa198; /* teal accent */
+  padding-left: 1em;
+  color: #586e75;
+  background-color: #f0eee8;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.5em;
+}
+th {
+  background-color: #eee8d5;
+}
+
+/* KaTeX / math blocks */
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: none;
   white-space: normal;
   word-break: break-word;
+  background: #fdf6e3;
+  padding: 0.5em;
+  border-radius: 4px;
 }
 .katex-display::-webkit-scrollbar {
   display: none;
 }
+

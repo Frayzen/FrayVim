@@ -1,6 +1,25 @@
 return {
+s({ trig = "hat", dscr = "\\hat{x}" }, {
+    t("\\hat{"), i(1, "x"), t("}"), i(0)
+  }),
+ s({ trig = "dot", dscr = "\\dot{x}" }, {
+    t("\\dot{"), i(1, "x"), t("}"), i(0)
+  }),
+
+s({ trig = "hb", dscr = "\\hbar" }, {
+    t("\\hbar"), i(0)
+  }),
+s({ trig = "om0", dscr = "\\omega_0" }, {
+    t("\\omega_0"), i(0)
+  }),
+s({ trig = "om", dscr = "\\omega" }, {
+    t("\\omega"), i(0)
+  }),
+s({ trig = "dg", dscr = "\\dagger" }, {
+    t("\\dagger"), i(0)
+  }),
   s({ trig = "iff", dscr = "iff" }, {
-    t("\\Leftrightarrow"), i(0)
+    t("\\leftrightarrow"), i(0)
   }),
   s({ trig = "ot", dscr = "Tensor Product \\otimes" }, {
     t("\\otimes"), i(0)
@@ -66,6 +85,10 @@ return {
   s({ trig = "brac", dscr = "auto size bracked \\left( \\right)" }, {
     t("\\left("), i(1, "input"), t("\\right)"), i(0)
   }),
+  s({ trig = "mat", dscr = "matrix" }, {
+    t("\\begin{pmatrix}"), i(1, "a & b \\\\ c & d"), t("\\end{pmatrix}"), i(0)
+  }),
+
   s({ trig = "partt", dscr = "differentiate resp t" }, {
     t("\\frac{\\partial "), i(1, "input"), t("}{\\partial t}"), i(0)
   }),
@@ -128,7 +151,7 @@ return {
   }),
   -- multi line exp
   s({ trig = "mth", dscr = "Multiline exp $$ input $$" }, {
-    t({ "$$" , "" }),
+    t({ "$$", "" }),
     i(1, "input"),
     t({ "", "$$" }),
     i(0)

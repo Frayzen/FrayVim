@@ -43,6 +43,18 @@ return {
           julia = {
             command = { "julia" }
           },
+          coq = {
+            command = { "/home/tim/.opam/coq-env/bin/coqtop", "-Q", "/home/tim/.opam/coq-env/lib/coq-core", "Coq" },
+            format = require("iron.fts.common").bracketed_paste,
+            block_dividers = {
+              "^%s*%(%* BLOCK %*%)%s*$" -- lines that exactly match: (* BLOCK *)
+            },
+          }
+
+          -- coq = {
+          --   command = { "/home/tim/.nix-profile/bin/coqtop", "-Q", "/home/tim/.nix-profile/lib/coq-core", "Coq" },
+          --   format = common.bracketed_paste,
+          -- },
         },
         -- repl_open_cmd = view.right("40%"), -- ⬅️ this opens REPL on right in a vertical split
 

@@ -328,3 +328,52 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end
 })
 
+
+-- Snacks refresh
+-- Add this to your image viewer config
+vim.api.nvim_create_autocmd({"BufEnter", "WinEnter"}, {
+  pattern = "*",
+  callback = function()
+    vim.cmd("redraw!")
+  end,
+})
+
+-- -- fix md amth bug
+-- --
+-- local ok, overlay = pcall(require, "mdmath.overlay")
+-- if not ok then
+--   return
+-- end
+
+-- -- monkey patch parse function to prevent crashes
+-- local old_parse = overlay.parse
+
+-- overlay.parse = function(...)
+--   local ok2, res = pcall(old_parse, ...)
+--   if not ok2 then
+--     -- silently ignore parse errors caused by window resize / TS bugs
+--     return nil
+--   end
+--   return res
+-- end
+
+-- vertical split 
+-- vim.api.nvim_create_autocmd("VimResized", {
+--   callback = function()
+--     -- Only apply when exactly 2 vertical splits
+--     local wins = vim.api.nvim_tabpage_list_wins(0)
+--     if #wins == 2 then
+--       vim.cmd("vertical resize 86")
+--     end
+--   end
+-- })
+-- vim.keymap.set("n", "<C-w>v", function()
+--   vim.cmd("vsplit")
+-- end)
+vim.cmd("vertical resize 86")
+
+-- no bold iron
+vim.api.nvim_set_hl(0, "IronNormal", { bold = false })
+vim.api.nvim_set_hl(0, "IronRepl", { bold = false })
+vim.api.nvim_set_hl(0, "IronDebug", { bold = false })
+

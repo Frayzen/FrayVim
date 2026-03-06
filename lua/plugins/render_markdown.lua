@@ -54,12 +54,13 @@ return {
         },
       },
       anti_conceal  = {
-        enabled = false,
+        enabled = true,
         ignore = {
           -- code_background = true,
-          bullet = true,
-          dash = true,
-          sign = true,
+          -- bullet = true,
+          -- dash = true,
+          -- sign = true,
+          image = true
         },
         above = 0,
         below = 0,

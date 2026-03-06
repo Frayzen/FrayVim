@@ -31,14 +31,6 @@ require("replace")
 
 
 
--- diagams
-local qc = require("qciruit")
--- Load the module
-
--- Keybindings (normal mode)
--- vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("qciruit").fold_circuit()<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>fu', ':lua require("qciruit").unfold_circuit()<CR>', { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap('n', '<leader>fc', ':lua require("qciruit").toggle_circuits()<CR>', { noremap = true, silent = true })
 -- Map a key to run it on selected text
 vim.api.nvim_set_keymap(
@@ -60,3 +52,19 @@ end
 
 vim.cmd([[autocmd BufRead,BufNewFile *.str set filetype=javascript]])
 
+
+-- vertical split rezising
+-- vim.o.equalalways = false
+-- vim.keymap.set("n", "<leader>=", "<C-w>=")
+vim.api.nvim_create_autocmd("VimResized", {
+  callback = function()
+    -- Only apply when exactly 2 vertical splits
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    if #wins == 2 then
+      vim.cmd("vertical resize 86")
+    end
+  end
+})
+
+
+-- vim.o.equalalways = true

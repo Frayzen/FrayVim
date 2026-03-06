@@ -9,7 +9,7 @@ return {
         "lua",
         "vim",
         "vimdoc",
-        "python"
+        "python",
       },
       highlight = {
         enable = true,

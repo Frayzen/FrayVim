@@ -6,7 +6,7 @@ return {
             {
                 { "<Leader>R", group = "Replace with spectre" },
                 {
-                    "<Leader>s",
+                    "<Leader>sp",
                     "<cmd>lua require('spectre').toggle()<CR>",
                     desc = "Toggle spectre",
                 },
