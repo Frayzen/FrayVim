@@ -14,23 +14,25 @@ local function parse_texpresso_log()
   local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
   local qf = {}
   local seen = {} -- track duplicates
-
   for i, line in ipairs(lines) do
-    if line:match("Undefined control sequence") or line:match("^!") then
-      local key = line
+  if line:match("Undefined control sequence") or line:match("^!") then
+    local key = line
 
-      if not seen[key] then
-        seen[key] = true
-        table.insert(qf, {
-          filename = vim.fn.expand("%"),
-          lnum = i,
-          text = line,
-          type = "E",
-        })
-      end
+    if not seen[key] then
+      seen[key] = true
+
+      -- extract filename + line number
+      local filename, lnum = line:match("([%w%._/-]+%.tex):(%d+):")
+
+      table.insert(qf, {
+        filename = filename or vim.fn.expand("%:p"),
+        lnum = tonumber(lnum) or 1,
+        text = line,
+        type = "E",
+      })
     end
   end
-
+end
   if #qf > 0 then
     vim.fn.setqflist({}, "r", { title = "TeXpresso", items = qf })
     vim.cmd("copen")
@@ -57,3 +59,4 @@ vim.keymap.set("n", "<leader>tq", ":cclose<CR>", { desc = "Close quickfix" })
 
 end,
 }
+
