@@ -1,29 +1,34 @@
-return
-{
+
+return {
   'Thiago4532/mdmath.nvim',
-  ft = { 'markdown', "python" },
+  lazy = false,
+  ft = { 'markdown', 'tex', 'latex' },
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
     require('mdmath').setup({
       math_patterns = {
         -- Standard $$ blocks
-        { start = "\\$\\$",     stop = "\\$\\$",   priority = 1 },
+        { start = "\\$\\$", stop = "\\$\\$", priority = 1 },
+        -- Single $ math
+        { start = "%$", stop = "%$", priority = 2 },
+        -- Equation environment - simplified pattern
+        { start = "\\begin{equation}", stop = "\\end{equation}", priority = 1 },
+        -- Optional: other equation environments
+        { start = "\\begin{equation%*}", stop = "\\end{equation%*}", priority = 1 },
+        { start = "\\begin{align}", stop = "\\end{align}", priority = 1 },
+        { start = "\\begin{align%*}", stop = "\\end{align%*}", priority = 1 },
         -- Indented $$ blocks (4+ spaces)
-        { start = "^%s*\\$\\$", stop = "\\$\\$",   priority = 2 },
-
-        { start = "^#\\$\\$",   stop = "^#\\$\\$", priority = 1 },
+        { start = "^%s*\\$\\$", stop = "\\$\\$", priority = 2 },
+        { start = "^#\\$\\$", stop = "^#\\$\\$", priority = 1 },
       },
       server_path = 'node',
       server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
       foreground = '#5a966b',
       anticonceal = true,
-
       conceal_cursor = '',
-
       dynamic = true,
-      dynamic_scale = 0.8,  -- Disable dynamic scaling
-      internal_scale = 1.5, -- Double resolution for crisper text
-
+      dynamic_scale = 0.8,
+      internal_scale = 1.5,
       css = [[
           .math-render {
             min-width: 100% !important;
@@ -32,7 +37,7 @@ return
             background-color: rgba(200,200,200,0.1);
             border-radius: 4px;
             overflow-x: auto !important;
-            white-space: pre !important;  -- Changed from nowrap to pre
+            white-space: pre !important;
           }
           .math-render .katex-display {
             margin: 0.5em 0 !important;
@@ -42,15 +47,6 @@ return
             font-size: 1.1em !important;
           }
         ]],
-    })
-
-    -- Add autocommand to prevent wrapping in markdown files
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = { 'markdown', 'tex' },
-      callback = function()
-        vim.opt_local.wrap = false
-        vim.opt_local.linebreak = false
-      end
     })
   end,
   init = function()
@@ -62,5 +58,4 @@ return
       on_exit = function() end
     })
   end,
-
 }
