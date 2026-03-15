@@ -1,4 +1,3 @@
-
 return {
   'Thiago4532/mdmath.nvim',
   lazy = false,
@@ -8,19 +7,19 @@ return {
     require('mdmath').setup({
       math_patterns = {
         -- Standard $$ blocks
-        { start = "\\$\\$", stop = "\\$\\$", priority = 1 },
+        -- { start = "\\$\\$",                 stop = "\\$\\$",               priority = 1 },
         -- Single $ math
-        { start = "%$", stop = "%$", priority = 2 },
-        -- Equation environment - simplified pattern
-        { start = "\\begin{equation}", stop = "\\end{equation}", priority = 1 },
-        -- Optional: other equation environments
-        { start = "\\begin{equation%*}", stop = "\\end{equation%*}", priority = 1 },
-        { start = "\\begin{align}", stop = "\\end{align}", priority = 1 },
-        { start = "\\begin{align%*}", stop = "\\end{align%*}", priority = 1 },
-        -- Indented $$ blocks (4+ spaces)
-        { start = "^%s*\\$\\$", stop = "\\$\\$", priority = 2 },
-        { start = "^#\\$\\$", stop = "^#\\$\\$", priority = 1 },
+        { start = "%$",                     stop = "%$",                   priority = 2 },
+        { start = "\\begin%{equation%}",  stop = "\\end%{equation%}",  priority = 1 },
+        { start = "\\begin{equation}",  stop = "\\end{equation}",  priority = 1 },
+        { start = "\\begin%{equation%*}", stop = "\\end%{equation%*}", priority = 1 },
+        { start = "\\begin%{align%}",     stop = "\\end%{align%}",     priority = 1 },
+        { start = "\\begin%{align%*}",    stop = "\\end%{align%*}",    priority = 1 },
+
+        -- { start = "^%s*\\$\\$", stop = "\\$\\$", priority = 2 },
+        -- { start = "^#\\$\\$", stop = "^#\\$\\$", priority = 1 },
       },
+
       server_path = 'node',
       server_args = { os.getenv('HOME') .. '/.local/share/nvim/lazy/mdmath.nvim/mdmath-js/src/server.js' },
       foreground = '#5a966b',
@@ -59,3 +58,4 @@ return {
     })
   end,
 }
+
