@@ -19,10 +19,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")  -- Loads all plugins from plugins directory
 
--- SETUP LSP
-require("lsp")
 
-
+-- LSP SETUP
+require('lsp')
 
 -- vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 --     pattern = {"*.md", "*.tex"},

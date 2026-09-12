@@ -1,3 +1,4 @@
+-- FORMATTER
 return {
 	"stevearc/conform.nvim",
 	config = function()
