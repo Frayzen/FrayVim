@@ -17,21 +17,23 @@ end
 
 mappings = {
   n = {
-    { "<esc><esc>", "<cmd>noh<CR>",       desc = "Remove highlitghting" },
-    { "<Leader>f,", group = "Find" },
-    { "<Leader>j,", group = "Java" },
-    { "<Leader>x",  group = "Quickfix" },
-    { "<Leader>n",  "<cmd>cnext<cr>",     desc = "Next quickfix" },
-    { "<Leader>p",  "<cmd>cprevious<cr>", desc = "Previous quickfix" },
-    { "<Leader>o",  "<cmd>copen<cr>",     desc = "Open quickfix" },
-    { "<Leader>c",  "<cmd>cclose<cr>",    desc = "Close quickfix" },
-    { "<Leader>L",  "<cmd>Lazy<CR>",      desc = "Lazy" },
+    { "<esc><esc>",    "<cmd>noh<CR>",                         desc = "Remove highlitghting" },
+    { "<Leader>f,",    group = "Find" },
+    { "<Leader>j,",    group = "Java" },
+    { "<Leader>x",     group = "Quickfix" },
+    { "<Leader>n",     "<cmd>cnext<cr>",                       desc = "Next quickfix" },
+    { "<Leader>p",     "<cmd>cprevious<cr>",                   desc = "Previous quickfix" },
+    { "<Leader>o",     "<cmd>copen<cr>",                       desc = "Open quickfix" },
+    { "<Leader>c",     "<cmd>cclose<cr>",                      desc = "Close quickfix" },
+    { "<Leader>L",     "<cmd>Lazy<CR>",                        desc = "Lazy" },
+    { "<Leader><Tab>", "<cmd>LspClangdSwitchSourceHeader<CR>", desc = "Switch source header" },
   },
 }
 
 vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-/>", "<C-\\><C-n>", { noremap = true })
+vim.keymap.set("t", "<C-_>", "<C-\\><C-n>")
 
 function register_mapping(m)
   local wk = require("which-key")

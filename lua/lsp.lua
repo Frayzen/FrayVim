@@ -2,15 +2,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local servers = {
   ts_ls = {},
-  clangd = {
-    on_attach = function()
-      register_mapping({
-        n = {
-          { "<Leader><Tab>", "<cmd>ClangdSwitchSourceHeader<CR>", desc = "Swap source / header" },
-        },
-      })
-    end,
-  },
+  clangd = {},
   lua_ls = {},
   asm_lsp = {},
   rust_analyzer = {
@@ -62,7 +54,7 @@ local servers = {
   },
   cssls = {},
   dartls = {},
-  cmake = {},
+  neocmake = {},
   marksman = {
     filetypes = { "markdown" },
     settings = {
